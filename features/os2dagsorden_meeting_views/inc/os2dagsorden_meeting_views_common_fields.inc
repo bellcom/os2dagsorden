@@ -45,8 +45,8 @@ function os2dagsorden_meeting_views_common_meeting_title_listed($data){
     else
       echo $title;
   } else {//desktop device
-    if (mb_strlen($title) > 45)
-      echo mb_substr($title, 0, 42) . '...';
+    if (mb_strlen($title) > 22)
+      echo mb_substr($title, 0, 19) . '...';
     else
       echo $title;
   }
