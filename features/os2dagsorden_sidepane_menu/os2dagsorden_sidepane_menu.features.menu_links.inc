@@ -31,6 +31,7 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-50',
   );
+<<<<<<< Updated upstream
   // Exported menu link: menu-sidepane-menu:http://drupal.org
   $menu_links['menu-sidepane-menu:http://drupal.org'] = array(
     'menu_name' => 'menu-sidepane-menu',
@@ -52,12 +53,14 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '0',
   );
+=======
+>>>>>>> Stashed changes
   // Exported menu link: menu-sidepane-menu:meetings/print
   $menu_links['menu-sidepane-menu:meetings/print'] = array(
     'menu_name' => 'menu-sidepane-menu',
     'link_path' => 'meetings/print',
     'router_path' => 'meetings/print',
-    'link_title' => 'Halvårs-kalender',
+    'link_title' => 'Kalender oversigt',
     'options' => array(
       'attributes' => array(
         'id' => 'menu-print-kalendar',
@@ -75,9 +78,11 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Budget 2014');
-  t('Halvårs-kalender');
   t('Hjem');
+<<<<<<< Updated upstream
+=======
+  t('Kalender oversigt');
+>>>>>>> Stashed changes
 
 
   return $menu_links;
