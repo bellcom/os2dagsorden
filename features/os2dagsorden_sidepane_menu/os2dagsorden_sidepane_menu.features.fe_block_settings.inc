@@ -24,18 +24,11 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
     ),
   );
 
-<<<<<<< Updated upstream
-  // syddjurs_omega_subtheme
-=======
   // balkdags
->>>>>>> Stashed changes
   $theme = array();
 
   $theme['block-show_hide_menu_block'] = array(
     'module' => 'block',
-<<<<<<< Updated upstream
-    'theme' => 'syddjurs_omega_subtheme',
-=======
     'theme' => 'balkdags',
     'status' => 0,
     'weight' => '0',
@@ -85,7 +78,6 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
     'module' => 'menu',
     'delta' => 'menu-sidepane-menu',
     'theme' => 'bartik',
->>>>>>> Stashed changes
     'status' => 0,
     'weight' => '0',
     'region' => '',
