@@ -24,20 +24,12 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
     ),
   );
 
-<<<<<<< HEAD
-  // balkdags
-=======
   // os2dagsorden_theme
->>>>>>> 07211cd2a7f2c4df0616eb66c8d20bedb89f4d8c
   $theme = array();
 
   $theme['block-show_hide_menu_block'] = array(
     'module' => 'block',
-<<<<<<< HEAD
-    'theme' => 'balkdags',
-=======
     'theme' => 'os2dagsorden_theme',
->>>>>>> 07211cd2a7f2c4df0616eb66c8d20bedb89f4d8c
     'status' => 0,
     'weight' => '0',
     'region' => '',
@@ -52,11 +44,7 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
   $theme['menu-menu-sidepane-menu'] = array(
     'module' => 'menu',
     'delta' => 'menu-sidepane-menu',
-<<<<<<< HEAD
-    'theme' => 'balkdags',
-=======
     'theme' => 'os2dagsorden_theme',
->>>>>>> 07211cd2a7f2c4df0616eb66c8d20bedb89f4d8c
     'status' => 0,
     'weight' => '-19',
     'region' => '',
@@ -67,8 +55,7 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
     'cache' => -1,
   );
 
-<<<<<<< HEAD
-  $export['theme']['balkdags'] = $theme;
+  $export['theme']['os2dagsorden_theme'] = $theme;
 
   // bartik
   $theme = array();
@@ -102,9 +89,6 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
   );
 
   $export['theme']['bartik'] = $theme;
-=======
-  $export['theme']['os2dagsorden_theme'] = $theme;
->>>>>>> 07211cd2a7f2c4df0616eb66c8d20bedb89f4d8c
 
   $theme_default = variable_get('theme_default', 'garland');
   $themes = list_themes();
