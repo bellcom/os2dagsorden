@@ -22,7 +22,7 @@ function os2dagsorden_front_page_views_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Medlem af';
+  $handler->display->display_options['title'] = 'Adgang lukket dagsorden';
   $handler->display->display_options['css_class'] = 'front-page-info-block';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
@@ -82,7 +82,7 @@ os2dagsorden_front_page_views_user_committees_help_text();
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $translatables['user_committee'] = array(
     t('Master'),
-    t('Medlem af'),
+    t('Adgang lukket dagsorden'),
     t('more'),
     t('Apply'),
     t('Reset'),

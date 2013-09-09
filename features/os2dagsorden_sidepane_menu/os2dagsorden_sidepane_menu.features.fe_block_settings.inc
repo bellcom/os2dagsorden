@@ -57,6 +57,39 @@ function os2dagsorden_sidepane_menu_default_fe_block_settings() {
 
   $export['theme']['os2dagsorden_theme'] = $theme;
 
+  // bartik
+  $theme = array();
+
+  $theme['block-show_hide_menu_block'] = array(
+    'module' => 'block',
+    'theme' => 'bartik',
+    'status' => 0,
+    'weight' => '0',
+    'region' => '',
+    'custom' => '0',
+    'visibility' => '0',
+    'pages' => '',
+    'title' => '<none>',
+    'cache' => -1,
+    'machine_name' => 'show_hide_menu_block',
+  );
+
+  $theme['menu-menu-sidepane-menu'] = array(
+    'module' => 'menu',
+    'delta' => 'menu-sidepane-menu',
+    'theme' => 'bartik',
+    'status' => 0,
+    'weight' => '0',
+    'region' => '',
+    'custom' => '0',
+    'visibility' => '0',
+    'pages' => '',
+    'title' => '<none>',
+    'cache' => -1,
+  );
+
+  $export['theme']['bartik'] = $theme;
+
   $theme_default = variable_get('theme_default', 'garland');
   $themes = list_themes();
   foreach ($export as $theme_key => $settings) {

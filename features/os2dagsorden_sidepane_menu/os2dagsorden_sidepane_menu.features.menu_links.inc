@@ -36,7 +36,7 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
     'menu_name' => 'menu-sidepane-menu',
     'link_path' => 'meetings/print',
     'router_path' => 'meetings/print',
-    'link_title' => 'Halvårs-kalender',
+    'link_title' => 'Kalender oversigt',
     'options' => array(
       'attributes' => array(
         'id' => 'menu-print-kalendar',
@@ -54,9 +54,8 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Halvårs-kalender');
   t('Hjem');
-
+  t('Kalender oversigt');
 
   return $menu_links;
 }
