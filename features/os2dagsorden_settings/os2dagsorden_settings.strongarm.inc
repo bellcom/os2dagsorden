@@ -109,6 +109,13 @@ function os2dagsorden_settings_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'participants_delimeter';
+  $strongarm->value = '<br/>';
+  $export['participants_delimeter'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_name';
   $strongarm->value = 'OS2dagsorden';
   $export['site_name'] = $strongarm;
