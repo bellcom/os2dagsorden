@@ -75,7 +75,7 @@ os2dagsorden_meetings_calendar_view_breadcrumb();
   $handler->display->display_options['fields']['field_date_1']['alter']['text'] = 'yyy';
   $handler->display->display_options['fields']['field_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_date_1']['settings'] = array(
-    'format_type' => 'time_only',
+    'format_type' => 'short',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -206,7 +206,7 @@ $date = date(\'Y-m\');
   $handler->display->display_options['fields']['field_date_1']['alter']['text'] = 'yyy';
   $handler->display->display_options['fields']['field_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_date_1']['settings'] = array(
-    'format_type' => 'time_only',
+    'format_type' => 'short',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
