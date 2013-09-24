@@ -765,7 +765,7 @@ os2dagsorden_meeting_views_meeting_details_fields_indicator_meeting_has_notes($r
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['ui_name'] = 'Participants';
-  $handler->display->display_options['fields']['php']['label'] = 'Deltog';
+  $handler->display->display_options['fields']['php']['label'] = 'Deltagere';
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
@@ -1155,6 +1155,7 @@ os2dagsorden_meeting_views_meeting_details_fields_speaker_paper_link($meeting_id
     t('Lokation'),
     t('Deltog'),
     t('Deltop'),
+    t('Deltagere'),
     t('Print all speaker papers'),
     t('Print alle talepapirer'),
     t('Dagsorden'),
