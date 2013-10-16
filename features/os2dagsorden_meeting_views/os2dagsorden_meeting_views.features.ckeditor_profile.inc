@@ -84,21 +84,3 @@ function os2dagsorden_meeting_views_ckeditor_profile_defaults() {
   );
   return $data;
 }
-ugin_dir%drupalbreaks/',
-            'buttons' => array(
-              'DrupalBreak' => array(
-                'label' => 'DrupalBreak',
-                'icon' => 'images/drupalbreak.png',
-              ),
-            ),
-            'default' => 't',
-          ),
-        ),
-      ),
-      'input_formats' => array(
-        'full_html' => 'Full HTML',
-      ),
-    ),
-  );
-  return $data;
-}
