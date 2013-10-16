@@ -11,17 +11,7 @@ function os2dagsorden_meeting_views_ckeditor_profile_defaults() {
   $data = array(
     'CKEditor Global Profile' => array(
       'name' => 'CKEditor Global Profile',
-      'settings' => array(
-        'ckeditor_path' => '%m/../../../libraries/ckeditor',
-        'ckeditor_local_path' => '',
-        'ckeditor_plugins_path' => '%m/plugins',
-        'ckeditor_plugins_local_path' => '',
-        'ckfinder_path' => '%m/ckfinder',
-        'ckeditor_allow_download_private_files' => 0,
-        'private_dir' => '',
-        'toolbar_wizard' => 't',
-        'loadPlugins' => array(),
-      ),
+      'settings' => array(),
       'input_formats' => array(),
     ),
     'Syddjurs_full' => array(
@@ -77,6 +67,24 @@ function os2dagsorden_meeting_views_ckeditor_profile_defaults() {
             'name' => 'drupalbreaks',
             'desc' => 'Plugin for inserting Drupal teaser and page breaks.',
             'path' => '%base_path%%plugin_dir%drupalbreaks/',
+            'buttons' => array(
+              'DrupalBreak' => array(
+                'label' => 'DrupalBreak',
+                'icon' => 'images/drupalbreak.png',
+              ),
+            ),
+            'default' => 't',
+          ),
+        ),
+      ),
+      'input_formats' => array(
+        'full_html' => 'Full HTML',
+      ),
+    ),
+  );
+  return $data;
+}
+ugin_dir%drupalbreaks/',
             'buttons' => array(
               'DrupalBreak' => array(
                 'label' => 'DrupalBreak',
