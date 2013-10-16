@@ -537,7 +537,3 @@ function os2dagsorden_meeting_views_strongarm() {
 
   return $export;
 }
-arm;
-
-  return $export;
-}
