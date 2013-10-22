@@ -57,5 +57,6 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
   t('Hjem');
   t('Kalender oversigt');
 
+
   return $menu_links;
 }

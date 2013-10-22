@@ -244,6 +244,10 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
   $xml_item['documentid'] = (string) $xml_item_document['documentid'];
   $xml_item['full_text'] = trim((string) $xml->FullText);
 
+ if(variable_get('os2web_edoc_esdh_nl2br', TRUE)){
+    $xml_item['full_text'] = nl2br($xml_item['full_text']);
+  }
+
   $item = array(
     'id' => $xml_item['number'],
     'sysid' => crc32($meeting['committee'] . ' ' . $meeting['meeting_date'] . ' ' . $xml_item['documentid']),//generated id - because there is not unique ID for the bullet point
@@ -275,6 +279,11 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
   foreach ($xml_item_bullet->Attachment as $bullet_xml) {
     $bullet_title = (string) $bullet_xml->NeutralTitle;
     $bullet_body = (string) trim($bullet_xml->FullText);
+
+    if(variable_get('os2web_edoc_esdh_nl2br', TRUE)){
+      $bullet_body = nl2br($bullet_body);
+    }
+
     $bullet_id = (string) $bullet_xml['attachmentid'];
     $bullet_access = (string) $bullet_xml->PublishingType;
     if (empty($bullet_body)) {

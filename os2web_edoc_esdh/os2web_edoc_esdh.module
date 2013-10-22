@@ -56,6 +56,13 @@ function os2web_edoc_esdh_form_os2web_settings_settings_form_alter(&$form, &$for
     '#description' => 'Komma sepereret liste over ikke standard tegn der skal fjernes ved import.',
     '#default_value' => variable_get('os2web_edoc_esdh_banned_special_char', MM_DEFAULT_BANNED_CHAR),
   );
+  $form['meetings']['os2web_edoc_esdh_nl2br'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Omskriv linjeskift til html breaks',
+    '#description' => 'Hvis indholdet er uformatteret tekst vil systemet ikke håndtere linjeskift medmindre denne funktion er slået til.',
+    '#default_value' => variable_get('os2web_edoc_esdh_nl2br', TRUE),
+  );
+
 }
 
 /**
