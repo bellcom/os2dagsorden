@@ -98,7 +98,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
   $export['os2dagsorden_annotator_light'] = $context;
 
   $context = new stdClass();
-  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'os2dagsorden_calendar_block';
   $context->description = 'Sidepane and the calendar block. Will be shown everywhere except the month view of a big calendar, and the pages with text (attachments).';
@@ -276,12 +276,6 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-bae826754ab8812775bd594878d7fdb1' => array(
-          'module' => 'views',
-          'delta' => 'bae826754ab8812775bd594878d7fdb1',
-          'region' => 'content',
-          'weight' => '-21',
-        ),
         'views-c8c6c91b397acf23018fcefd40a1fa29' => array(
           'module' => 'views',
           'delta' => 'c8c6c91b397acf23018fcefd40a1fa29',
@@ -370,7 +364,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
   $export['os2dagsorden_show_hide_menu'] = $context;
 
   $context = new stdClass();
-  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'os2dagsorden_sidepane';
   $context->description = 'Will be shown on calendar month view only. Other time os2web_calendar (sidepane included will be shown))';

@@ -369,7 +369,7 @@ function _os2web_esdh_provider_import_bullets($bullets) {
     $bullet['body'] = substr($bullet['body'], $content_ind_start);
 
     $node->field_bpa_body[$node->language][0]['value'] = $bullet['body'];
-    $node->field_bpa_body[$node->language][0]['format'] = 'filtered_html'; // If field has a format, you need to define it. Here we define a default filtered_html format for a body field  
+    $node->field_bpa_body[$node->language][0]['format'] = 'full_html'; // If field has a format, you need to define it. Here we define a default filtered_html format for a body field  
       
     node_submit($node);
     node_save($node);

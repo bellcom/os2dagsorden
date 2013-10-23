@@ -16,15 +16,15 @@ function os2dagsorden_ad_integration_strongarm() {
   $strongarm->name = 'ldap_authentication_conf';
   $strongarm->value = array(
     'sids' => array(
-      'ldap_syddjursnet' => 'ldap_syddjursnet',
+      'balk.dk' => 'balk.dk',
     ),
     'authenticationMode' => 1,
     'loginConflictResolve' => 2,
     'acctCreation' => 4,
-    'loginUIUsernameTxt' => NULL,
-    'loginUIPasswordTxt' => NULL,
+    'loginUIUsernameTxt' => 'Brugernavn',
+    'loginUIPasswordTxt' => 'Kodeord',
     'ldapUserHelpLinkUrl' => NULL,
-    'ldapUserHelpLinkText' => 'Logon Help',
+    'ldapUserHelpLinkText' => 'Hjælp til logon',
     'emailOption' => 3,
     'emailUpdate' => 1,
     'allowOnlyIfTextInDn' => array(),
@@ -33,7 +33,7 @@ function os2dagsorden_ad_integration_strongarm() {
     'excludeIfNoAuthorizations' => NULL,
     'ssoRemoteUserStripDomainName' => NULL,
     'seamlessLogin' => NULL,
-    'ldapImplementation' => 'mod_auth_sspi',
+    'ldapImplementation' => 'mod_auth_kerb',
     'cookieExpire' => NULL,
   );
   $export['ldap_authentication_conf'] = $strongarm;
@@ -50,6 +50,7 @@ function os2dagsorden_ad_integration_strongarm() {
     'mapping' => array(
       'username' => 'samaccountname',
       'mail' => 'mail',
+      'field_user_full_name' => 'displayname',
     ),
     'derivedMapping' => array(
       'field_navn_stilling' => array(
@@ -57,6 +58,10 @@ function os2dagsorden_ad_integration_strongarm() {
         'derive_value' => '',
       ),
       'field_user_id' => array(
+        'derive' => FALSE,
+        'derive_value' => '',
+      ),
+      'field_user_full_name' => array(
         'derive' => FALSE,
         'derive_value' => '',
       ),

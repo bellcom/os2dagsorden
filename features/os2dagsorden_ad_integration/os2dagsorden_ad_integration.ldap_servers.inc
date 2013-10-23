@@ -15,14 +15,14 @@ function os2dagsorden_ad_integration_default_ldap_servers() {
   $ldap_servers_conf->api_version = 1;
   $ldap_servers_conf->sid = 'ldap_syddjursnet';
   $ldap_servers_conf->name = '706DC02';
-  $ldap_servers_conf->status = TRUE;
+  $ldap_servers_conf->status = FALSE;
   $ldap_servers_conf->ldap_type = 'ad';
   $ldap_servers_conf->address = '10.1.1.22';
   $ldap_servers_conf->port = 389;
   $ldap_servers_conf->tls = FALSE;
   $ldap_servers_conf->bind_method = TRUE;
   $ldap_servers_conf->binddn = 'DrupalAdLookup';
-  $ldap_servers_conf->bindpw = 'w0b8cBKkYDs0FIUIKnWuRg==';
+  $ldap_servers_conf->bindpw = 'cMkEuKn5Zk9MLLb4lCTe7Q==';
   $ldap_servers_conf->basedn = array(
     0 => 'DC=intern,DC=syddjurs,DC=dk',
   );
