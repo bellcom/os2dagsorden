@@ -1126,7 +1126,7 @@ os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachments_with_
   $handler->display->display_options['fields']['php_5']['php_output'] = '<?php
 $meeting_id = $row->nid_1;
 $bp_id = $row->nid;
-if (function_exists(\'os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link\')){
+if (function_exists(\'os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link\') && variable_get(\'os2dagsorden_show_print_icon\')){
    if (os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link($meeting_id,$bp_id )){
      echo \'<span class="bullet-point-print-link">&nbsp</span>\';
   }
