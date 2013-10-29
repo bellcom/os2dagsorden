@@ -38,7 +38,8 @@ function os2web_sbsys_esdh_mm_get_import_list() {
    */
   $uris = array();
   foreach (file_scan_directory(variable_get('os2web_sbsys_esdh_mm_path', MM_IMPORT_DIR), '/\.xml$/i', array('recurse' => TRUE)) as $xml_file) {
-    $uris[] = array('id' => null, 'uri' => $xml_file->uri);
+    $pub_id = (int) str_replace('Publication', '', $xml_file->name);
+    $uris[] = array('id' => $pub_id, 'uri' => $xml_file->uri);
   }
   return $uris;
 }
@@ -334,6 +335,7 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
             '@date'     => date('d-m-Y', strtotime((string) $item_history->Created)),
           ));
           $history['body'] .= '<br>' . strip_tags((string) $item_history->Content) . '<br>';
+          $history['sysid'] = $item_history['ID'] . '-history';
         }
       }
       if ($history['body'] !== '') {
@@ -352,7 +354,6 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
         }
       }
     }
-
   // Process enclsures.
   foreach ($xml_item_document as $enclosures) {
     foreach ($enclosures->Enclosure as $enclosure) {
