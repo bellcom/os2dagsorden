@@ -45,14 +45,14 @@ function os2web_sbsys_esdh_mm_get_import_list() {
 
 
 /**
- * Strip illegal characters from the XML. 
+ * Strip illegal characters from the XML.
  * Ex &#xC = ASCII new line feed
- * 
+ *
  * @param object $string
  *   string to sanitise
- * 
+ *
  * $return array
- *   The string sanitised 
+ *   The string sanitised
  */
 function utf8_for_xml($string)
 {
@@ -78,9 +78,9 @@ function os2web_sbsys_esdh_mm_import_meeting($meeting) {
   }
   $meetings = array();
   if (is_file(drupal_realpath($file))) {
-    
+
     libxml_use_internal_errors(true);
-    $manifest = simplexml_load_string(utf8_for_xml(file_get_contents(drupal_realpath($file))), 'SimpleXMLElement', LIBXML_NOCDATA); 
+    $manifest = simplexml_load_string(utf8_for_xml(file_get_contents(drupal_realpath($file))), 'SimpleXMLElement', LIBXML_NOCDATA);
 
     libxml_clear_errors();
     libxml_use_internal_errors(false);
@@ -127,7 +127,7 @@ function os2web_sbsys_esdh_mm_import_meeting($meeting) {
           $meeting_type = 'Referat';
           break;
       }
-      
+
       $directory_name = dirname(drupal_realpath($file));
       // Check if the committee is allowed to publish.
       $publish_committee = array_map('trim', explode(',', variable_get('os2web_sbsys_esdh_approved_committees', MM_DEFAULT_APPROVED)));
@@ -155,21 +155,21 @@ function os2web_sbsys_esdh_mm_import_meeting($meeting) {
 	if (!empty($member->ParticipationNote)) {
 	  $member->ParticipationNote = ", " . $member->ParticipationNote;
 	}
- 
+
 	if ($member->ParticipationStatusAsValue == '1' || $member->ParticipationStatusAsValue == '4') {
 	      $participants[] = (string) $member->Name . " - " . $member->ParticipationStatusAsText . $member->ParticipationNote;
 	}
         else if($member->ParticipationStatusAsValue == '0'){
           $participants[] = (string) $member->Name . $member->ParticipationNote;
         }
-	else { 
+	else {
 	  $participants_cancellation[] = (string) $member->Name . " - " . $member->ParticipationStatusAsText . $member->ParticipationNote;
 	}
       }
-      
+
       //Fixing meeting name
       $meeting_name = str_ireplace(array("dagsorden", "referat"), "", $meeting_name);
-      
+
       $meeting = array(
         'sys_id' => $sys_id,
         'meeting_id' => $sys_id,
@@ -187,7 +187,7 @@ function os2web_sbsys_esdh_mm_import_meeting($meeting) {
         'participants' => $participants,
         'participants_cancellation' => $participants_cancellation,
       );
-      
+
       /*stan@bellcom.dk 06.10 - importing multiple agendas*/
       $meeting_agendas = array();
       foreach($manifest->xpath("/Publication/Agendas/Agenda") as $agenda_instance){
@@ -202,7 +202,7 @@ function os2web_sbsys_esdh_mm_import_meeting($meeting) {
           }
         }
       }
-      
+
       $meeting_pdf = $manifest->xpath('/Meeting/MeetingAgendaTypes/MeetingAgendaType/PDFDocument');
       $meeting['pdf'] = (string) $meeting_pdf[0];
       $meeting['state'] = (string) $meeting_state[0];
@@ -242,7 +242,7 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda(&$meeting, $agenda_xml) {
   $agenda = $meeting;
   // Only add the agenda if its PDF exists.
   if (file_exists(drupal_realpath($meeting['uri'] . $meeting['pdf']))) {
-// There were no SBSYS meeting with meeting description, therefore disabled.  
+// There were no SBSYS meeting with meeting description, therefore disabled.
 //     $agenda['full_doc'] = array(
 //       'uri' => $meeting['uri'] . $meeting['pdf'],
 //       'title' => $meeting['committee'],
@@ -282,10 +282,11 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
   $xml_item['pdf'] = (string) $xml->PDFDocument;
   $xml_item_document = $xml->Enclosures;
   $xml_item_bullet = $xml->Fields;
+  $xml_item_history = $xml->ItemHistory;
   $xml_item['name'] = (string) $xml->Caption;
   $xml_item['document_type'] = (string) $xml->IsPublic;
   $xml_item_participants = $xml->Members;
-  
+
   $item = array(
     'id' => $meeting['current_item_nr'],
     'sysid' => (string) $xml['ID'],
@@ -306,16 +307,49 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
     //rewriting the access field to match esdh provider module
     $item['access'] = 'Lukket';
   }
-    
+
   // Process attachments.
     foreach ($xml_item_bullet->ItemField as $bullet_xml) {
-      
+
       if (((string) $bullet_xml->HasContent) === 'True'){
 	$item['bullets'][] = array(
 	  'title' => (string) $bullet_xml->Caption,
 	  'body' => (string) $bullet_xml->Content,
 	  'sysid' => (string) $bullet_xml['ID'],
 	);
+      }
+    }
+    // Process item history.
+    if (!empty($xml_item_history)) {
+      $history = array(
+        'title' => t('Beslutningshistorik'),
+        'body' => '',
+      );
+      foreach ($xml_item_history->ItemField as $item_history) {
+
+        if (((string) $item_history->HasContent) === 'True') {
+          $history['body'] .= t('@decision truffet af @comittee d. @date', array(
+            '@decision' => (string) $item_history->Caption,
+            '@comittee' => (string) $item_history->MeetingDetails->CommitteeName,
+            '@date'     => date('d-m-Y', strtotime((string) $item_history->Created)),
+          ));
+          $history['body'] .= '<br>' . strip_tags((string) $item_history->Content) . '<br>';
+        }
+      }
+      if ($history['body'] !== '') {
+        // If this is a Referat, put the history in before the beslutning element.
+        // Else just put in the buttom of the list.
+        if ($meeting['type'] === 'Referat') {
+          foreach($item['bullets'] as $key => $bullet) {
+            if ($bullet['title'] === 'Beslutning') {
+              array_splice( $item['bullets'], $key, 0, array($history) );
+              break;
+            }
+          }
+        }
+        else {
+          $item['bullets'][] = $history;
+        }
       }
     }
 
@@ -337,7 +371,7 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
       }
     }
   }
-  
+
   //Process members that did not participate in the bullet discussion
   $non_participants = '';
   foreach ($xml_item_participants->ItemMember as $participant){
@@ -345,7 +379,7 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
       $non_participants .= (string) $participant->Name . "<br/>";
     }
   }
-  
+
   if (!empty($non_participants)){
     //Add members that did not participate in the bullet discussion as a last bullet point
     $item['bullets'][] = array(
@@ -353,7 +387,7 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
       'body' => $non_participants,
     );
   }
-  
+
   $item += os2web_esdh_provider_default_item();
   return $item;
 }
