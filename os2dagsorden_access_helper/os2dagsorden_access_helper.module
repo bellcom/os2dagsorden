@@ -134,7 +134,7 @@ function os2dagsorden_access_helper_file_download ($uri){
   $result = db_query("SELECT f.* FROM {file_managed} f WHERE filename = :filename", array('filename' => $filename));
   foreach ($result as $file) {
     //find meeting by file->fid
-    
+            
     //closed agenda?
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
