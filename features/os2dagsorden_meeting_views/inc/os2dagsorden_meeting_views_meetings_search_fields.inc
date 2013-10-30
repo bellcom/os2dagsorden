@@ -124,8 +124,8 @@ function os2dagsorden_meeting_views_meetings_search_fields_placering($meta_data)
 	if (mb_strlen($to_print) > 40)
 	  $to_print = mb_substr($to_print, 0, 37) . '...';
       } else {
-	if (mb_strlen($to_print) > 60)
-	  $to_print = mb_substr($to_print, 0, 57) . '...';
+	if (mb_strlen($to_print) > 55)
+	  $to_print = mb_substr($to_print, 0, 52) . '...';
       }
     }
   }

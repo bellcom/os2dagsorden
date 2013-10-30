@@ -112,7 +112,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
   $form['os2dagsorden_expand_attachment_settings'] = array(
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
-      '#title' => t('Expand/not expand Bilag on bullet point expanding'),
+      '#title' => t('Meeting view settings'),
   );
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
   $form['os2dagsorden_expand_attachment_settings']['os2dagsorden_expand_attachment'] = array(
@@ -122,7 +122,12 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' => $options,
     '#description' => t('This decides whether a certain type of bullet point attachment - bilag will be expanded (activated) when functionality "Expand whole bullet point" is executed.'),
   );
-  
+  $form['os2dagsorden_expand_attachment_settings']['os2dagsorden_show_print_icon'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show print icon on bullets in agenda'),
+		'#description'=>t('Show print icon next to the bullet point'),
+    '#default_value' => variable_get('os2dagsorden_show_print_icon'),
+  );
   //show or not show meeting category in the calendar
   $form['os2dagsorden_show_meeting_category_settings'] = array(
       '#type' => 'fieldset',
@@ -135,7 +140,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#title' => t('Show meeting cetegories'),
     '#default_value' => variable_get('os2dagsorden_show_meeting_category'),
     '#options' => $options2,
-    '#description' => t('This decides whether a meeting title in the calendar view will be prefixed with the meeting category (<b>[P]</b>olitical/<b>[O]</b>rganization)'),
+		'#description' => t('This decides whether a meeting title in the calendar view will be prefixed with the meeting category (<b>[P]</b>olitical/<b>[O]</b>rganization)'),
   );
   
   //Meeting import settings

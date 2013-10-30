@@ -1133,7 +1133,7 @@ os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachments_with_
   $handler->display->display_options['fields']['php_5']['php_output'] = '<?php
 $meeting_id = $row->nid_1;
 $bp_id = $row->nid;
-if (function_exists(\'os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link\')){
+if (function_exists(\'os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link\') && variable_get(\'os2dagsorden_show_print_icon\')){
    if (os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link($meeting_id,$bp_id )){
      echo \'<span class="bullet-point-print-link">&nbsp</span>\';
   }
@@ -1761,7 +1761,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_has_notes($row->nid);
   $handler->display->display_options['fields']['php_2']['label'] = 'Møde';
   $handler->display->display_options['fields']['php_2']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['php_2']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
-  $handler->display->display_options['fields']['php_2']['element_label_class'] = 'views-field-field-title-short';
+  $handler->display->display_options['fields']['php_2']['element_label_class'] = 'views-field-field-title-short views-meeting-search-field-title';
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php
 os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
@@ -1775,6 +1775,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
   $handler->display->display_options['fields']['field_date']['label'] = 'Dato';
   $handler->display->display_options['fields']['field_date']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_date']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
+  $handler->display->display_options['fields']['field_date']['element_label_class'] = 'views-meeting-search-field-date';
   $handler->display->display_options['fields']['field_date']['empty'] = '&nbsp;';
   $handler->display->display_options['fields']['field_date']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
@@ -1795,6 +1796,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
   $handler->display->display_options['fields']['field_committee']['alter']['max_length'] = '20';
   $handler->display->display_options['fields']['field_committee']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['field_committee']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['field_committee']['element_class'] = 'views-meeting-search-field-commitee';
   $handler->display->display_options['fields']['field_committee']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_committee']['empty'] = '&nbsp;';
   $handler->display->display_options['fields']['field_committee']['hide_alter_empty'] = FALSE;
