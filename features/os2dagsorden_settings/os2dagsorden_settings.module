@@ -47,7 +47,14 @@ function os2dagsorden_settings_menu() {
         'access arguments' => array('administer os2web'),
         'type' => MENU_NORMAL_ITEM,
     );
-    
+    $items['admin/os2dagsorden'] = array(
+    'title' => 'OS2Web',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/config/os2dagsorden/settings'),
+    'access arguments' => array('administer os2web'),  
+	  'position' => 'left',
+
+  );
     return $items;
 }
 

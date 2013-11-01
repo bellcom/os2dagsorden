@@ -180,7 +180,6 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
     ),
     'user' => array(
       'values' => array(
-        'administrator' => 'administrator',
         'authenticated user' => 'authenticated user',
       ),
     ),
@@ -192,7 +191,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => '-exp-meetings_search-page',
           'region' => 'content',
-          'weight' => '-22',
+          'weight' => '-10',
         ),
         'menu-menu-sidepane-menu' => array(
           'module' => 'menu',
@@ -280,7 +279,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => 'c8c6c91b397acf23018fcefd40a1fa29',
           'region' => 'content',
-          'weight' => '-20',
+          'weight' => '0',
         ),
       ),
     ),
@@ -444,7 +443,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => '-exp-meetings_search-page',
           'region' => 'content',
-          'weight' => '-22',
+          'weight' => '-9',
         ),
         'menu-menu-sidepane-menu' => array(
           'module' => 'menu',
