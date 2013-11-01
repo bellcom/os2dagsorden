@@ -26,7 +26,6 @@ features[context][] = os2dagsorden_show_hide_menu
 features[context][] = os2dagsorden_sidepane
 features[context][] = os2dagsorden_sidepane_ballerup
 features[context][] = os2dagsorden_user_logout
-features[context][] = os2dagsorden_user_page_calendar_block_ballerup
 features[ctools][] = context:context:3
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1

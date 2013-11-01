@@ -176,7 +176,6 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
       'values' => array(
         '~calendar-field-date/month*' => '~calendar-field-date/month*',
         '~admin/*' => '~admin/*',
-        '~user*' => '~user*',
       ),
     ),
     'user' => array(
@@ -192,7 +191,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => '-exp-meetings_search-page',
           'region' => 'content',
-          'weight' => '-22',
+          'weight' => '-10',
         ),
         'menu-menu-sidepane-menu' => array(
           'module' => 'menu',
@@ -280,7 +279,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => 'c8c6c91b397acf23018fcefd40a1fa29',
           'region' => 'content',
-          'weight' => '-20',
+          'weight' => '0',
         ),
       ),
     ),
@@ -444,7 +443,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => '-exp-meetings_search-page',
           'region' => 'content',
-          'weight' => '-22',
+          'weight' => '-9',
         ),
         'menu-menu-sidepane-menu' => array(
           'module' => 'menu',
@@ -505,61 +504,6 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
   // Included for use with string extractors like potx.
   t('Modified log out menu');
   $export['os2dagsorden_user_logout'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'os2dagsorden_user_page_calendar_block_ballerup';
-  $context->description = 'Calendar block. Will be shown on user page.';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'user*' => 'user*',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'authenticated user' => 'authenticated user',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'menu-menu-sidepane-menu' => array(
-          'module' => 'menu',
-          'delta' => 'menu-sidepane-menu',
-          'region' => 'sidebar_second',
-          'weight' => '-22',
-        ),
-        'views-events-block_1' => array(
-          'module' => 'views',
-          'delta' => 'events-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-21',
-        ),
-        'views-user_committee-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_committee-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-20',
-        ),
-        'views-user_follow_committees-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_follow_committees-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-19',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Calendar block. Will be shown on user page.');
-  $export['os2dagsorden_user_page_calendar_block_ballerup'] = $context;
 
   return $export;
 }
