@@ -3556,7 +3556,14 @@ if (isset($entity->field_ref_bullet_points[\'und\'])) {
     ),
     'field_instance' => array(
       'bundle' => 'user',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'value' => 'pol',
+        ),
+        1 => array(
+          'value' => 'org',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
