@@ -338,10 +338,13 @@ function _os2dagsorden_annotator_view($meeting_id, $bullet_point_id, $bilag_id) 
     
 	  //bilag has converter to HTML version of file, getting the text out of it
 	  if (!empty($bilag->field_bpa_file_html['und'][0])){
-	    $file_uri = $bilag->field_bpa_file_html['und'][0]['uri'];
-	    $body_file = file_get_contents($file_uri);
-	    $text = os2dagsorden_pdf2htmlex_hide_unused_pages($body_file, $pageStart, $pageEnd);
-	    $pageAmount = $bilag->field_bpa_page_amount['und'][0]['value'];
+	    //should bilag be visible
+	    if (variable_get('os2dagsorden_show_bilag', TRUE)){
+		$file_uri = $bilag->field_bpa_file_html['und'][0]['uri'];
+		$body_file = file_get_contents($file_uri);
+		$text = os2dagsorden_pdf2htmlex_hide_unused_pages($body_file, $pageStart, $pageEnd);
+		$pageAmount = $bilag->field_bpa_page_amount['und'][0]['value'];
+	    }
 	  }
 	  
 	  //creating link for downloading pdf version

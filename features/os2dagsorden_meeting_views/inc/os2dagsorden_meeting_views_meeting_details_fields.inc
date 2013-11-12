@@ -259,16 +259,19 @@ function os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachme
 	  print '<div id="' . $attachment->nid . '" class="indicator-has-no-notes"></div><a href="' . $link . '" target="_blank" class="first-child last-child">' . $title . '</a>';
 
 	  //attachment text - if any
-	  if (!empty($attachment->field_bpa_file_html['und'][0])){	  
-	    print '<div class="attachment_text_container">';
-
-	    print '<div class="attachment_text_trimmed_container ajax-progress bpa-' . $meeting_id . '-' . $bp_id . '-' . $attachment->nid . '">';
-
-	    print 'Vent venligst...<div class="throbber"></div>';
-	    print '</div>';
-	    print('<a class="first-child last-child" href="' . $link . '" target="_blank">Læs mere...</a>');
-
-	    print '</div>';
+	  if (!empty($attachment->field_bpa_file_html['und'][0])){
+	    //should bilag be visible
+	    if (variable_get('os2dagsorden_show_bilag', TRUE)){
+	      print '<div class="attachment_text_container">';
+  
+	      print '<div class="attachment_text_trimmed_container ajax-progress bpa-' . $meeting_id . '-' . $bp_id . '-' . $attachment->nid . '">';
+  
+	      print 'Vent venligst...<div class="throbber"></div>';
+	      print '</div>';
+	      print('<a class="first-child last-child" href="' . $link . '" target="_blank">Læs mere...</a>');
+  
+	      print '</div>';
+	    }
 	  }
 	} else {
 	  print '<a class="first-child last-child">' . $title . '</a>';
