@@ -31,31 +31,9 @@ function os2dagsorden_sidepane_menu_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-50',
   );
-  // Exported menu link: menu-sidepane-menu:meetings/print
-  $menu_links['menu-sidepane-menu:meetings/print'] = array(
-    'menu_name' => 'menu-sidepane-menu',
-    'link_path' => 'meetings/print',
-    'router_path' => 'meetings/print',
-    'link_title' => 'Kalender oversigt',
-    'options' => array(
-      'attributes' => array(
-        'id' => 'menu-print-kalendar',
-        'class' => array(
-          0 => 'menu-sidepane',
-        ),
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-49',
-  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Hjem');
-  t('Kalender oversigt');
 
 
   return $menu_links;
