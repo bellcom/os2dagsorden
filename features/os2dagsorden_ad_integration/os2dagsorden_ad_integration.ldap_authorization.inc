@@ -36,26 +36,26 @@ function os2dagsorden_ad_integration_default_ldap_authorization() {
 eDoc Chefgruppen|chefgruppen
 eDoc Teknik- og Miljøudvalget|teknik- og miljøudvalget
 eDoc Beredskabskommissionen|Beredskabskommissionen
-eDoc Det politiske SSP-udvalg|Det politiske SSP-udvalg
-eDoc Direktionen|Direktionen
-eDoc Eliteidrætsrådet|Eliteidrætsrådet
-eDoc Frivillighedsrådet|Frivillighedsrådet
-eDoc Grønt Råd|Grønt Råd
-eDoc Handicaprådet|Handicaprådet
-eDoc Innovationsudvalget|Innovationsudvalget
-eDoc Integrationsrådet|Integrationsrådet
-eDoc Internationalt Udvalg|Internationalt Udvalg
-eDoc KMB IT-udvalget|KMB IT-udvalget
-eDoc Kommunalbestyrelsen|Kommunalbestyrelsen
-eDoc Konstituerende møde|Konstituerende møde
-eDoc Kultur- og Fritidsudvalget|Kultur- og Fritidsudvalget
-eDoc Kunstrådet|Kunstrådet
-eDoc Seniorrådet|Seniorrådet
-eDoc Skole- og Uddannelsesudvalget|Skole- og Uddannelsesudvalget
-eDoc Socialudvalget|Socialudvalget
-eDoc Studierejseudvalget|Studierejseudvalget
-eDoc Sundheds- og Forebyggelsesudvalget|Sundheds- og Forebyggelsesudvalget
-eDoc Økonomiudvalget|Økonomiudvalget
+eDoc Det politiske SSP-udvalg|det politiske ssp-udvalg
+eDoc Direktionen|direktionen
+eDoc Eliteidrætsrådet|eliteidrætsrådet
+eDoc Frivillighedsrådet|frivillighedsrådet
+eDoc Grønt Råd|grønt råd
+eDoc Handicaprådet|handicaprådet
+eDoc Innovationsudvalget|innovationsudvalget
+eDoc Integrationsrådet|integrationsrådet
+eDoc Internationalt Udvalg|internationalt udvalg
+eDoc KMB IT-udvalget|kmb it-udvalget
+eDoc Kommunalbestyrelsen|kommunalbestyrelsen
+eDoc Konstituerende møde|konstituerende møde
+eDoc Kultur- og Fritidsudvalget|kultur- og fritidsudvalget
+eDoc Kunstrådet|kunstrådet
+eDoc Seniorrådet|seniorrådet
+eDoc Skole- og Uddannelsesudvalget|skole- og uddannelsesudvalget
+eDoc Socialudvalget|socialudvalget
+eDoc Studierejseudvalget|studierejseudvalget
+eDoc Sundheds- og Forebyggelsesudvalget|sundheds- og forebyggelsesudvalget
+eDoc Økonomiudvalget|økonomiudvalget
 Grupper|os2dagsorden
 pro-os2-dagsorden-admin|os2dagsorden admin
 ';
