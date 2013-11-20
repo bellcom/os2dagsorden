@@ -28,7 +28,7 @@ function os2dagsorden_automated_logout_configuration_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_message';
-  $strongarm->value = 'Du har været inaktiv i 120 minutter. Ønsker du at logge af eller forsætte med at anvende OS2dagsorden?';
+  $strongarm->value = 'Du har været inaktiv i 120 minutter. Ønsker du at forsætte med at anvende OS2dagsorden?';
   $export['autologout_message'] = $strongarm;
 
   $strongarm = new stdClass();

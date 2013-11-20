@@ -191,7 +191,7 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => '-exp-meetings_search-page',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-22',
         ),
         'menu-menu-sidepane-menu' => array(
           'module' => 'menu',

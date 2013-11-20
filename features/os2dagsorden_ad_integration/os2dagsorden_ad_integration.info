@@ -18,6 +18,7 @@ features[ctools][] = ldap_servers:ldap_servers:1
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[ldap_authorization][] = drupal_role
+features[ldap_servers][] = balk.dk
 features[ldap_servers][] = ldap_syddjursnet
 features[variable][] = ldap_authentication_conf
 features[variable][] = ldap_profile_conf

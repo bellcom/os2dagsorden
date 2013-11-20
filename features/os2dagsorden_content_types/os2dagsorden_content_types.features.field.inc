@@ -2106,6 +2106,73 @@ if (isset($entity->field_ref_bullet_points[\'und\'])) {
     ),
   );
 
+  // Exported field: 'node-meeting-field_participants_cancellation'.
+  $fields['node-meeting-field_participants_cancellation'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_participants_cancellation',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 28,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_participants_cancellation',
+      'label' => 'participants_cancellation',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '19',
+      ),
+    ),
+  );
+
   // Exported field: 'node-meeting-field_ref_bullet_points'.
   $fields['node-meeting-field_ref_bullet_points'] = array(
     'field_config' => array(
@@ -2311,7 +2378,7 @@ if (isset($entity->field_ref_bullet_points[\'und\'])) {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -2381,11 +2448,11 @@ if (isset($entity->field_ref_bullet_points[\'und\'])) {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'file',
           'settings' => array(),
           'type' => 'file_default',
-          'weight' => 1,
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -3556,14 +3623,7 @@ if (isset($entity->field_ref_bullet_points[\'und\'])) {
     ),
     'field_instance' => array(
       'bundle' => 'user',
-      'default_value' => array(
-        0 => array(
-          'value' => 'pol',
-        ),
-        1 => array(
-          'value' => 'org',
-        ),
-      ),
+      'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -3706,6 +3766,7 @@ if (isset($entity->field_ref_bullet_points[\'und\'])) {
   t('a list of all acadre id\'s, that are connected to that committee group');
   t('bpa_id');
   t('leave empty to be able to manually attach it to user');
+  t('participants_cancellation');
   t('represents the committees the user is a part of');
 
   return $fields;
