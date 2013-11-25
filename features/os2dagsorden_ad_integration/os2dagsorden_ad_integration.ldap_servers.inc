@@ -14,15 +14,15 @@ function os2dagsorden_ad_integration_default_ldap_servers() {
   $ldap_servers_conf->disabled = FALSE; /* Edit this to true to make a default ldap_servers_conf disabled initially */
   $ldap_servers_conf->api_version = 1;
   $ldap_servers_conf->sid = 'balk.dk';
-  $ldap_servers_conf->name = 'balk.dk';
+  $ldap_servers_conf->name = 'dc01.balk.dk';
   $ldap_servers_conf->status = TRUE;
   $ldap_servers_conf->ldap_type = 'ad';
-  $ldap_servers_conf->address = 'balk.dk';
+  $ldap_servers_conf->address = 'dc01.balk.dk';
   $ldap_servers_conf->port = 389;
   $ldap_servers_conf->tls = FALSE;
   $ldap_servers_conf->bind_method = TRUE;
   $ldap_servers_conf->binddn = 'CN=Systemaccount til AD-opslag fra Drupal (AOS_DRUPAL-AD), OU=System account, OU=Ballerup IT Adm, DC=balk, DC=dk';
-  $ldap_servers_conf->bindpw = 'FQ416r8Hv+gi8KSz0eNAYUOYB3tG';
+  $ldap_servers_conf->bindpw = '6MQ5QA+wy0w6mMmk1EtDF5VH+sZ2';
   $ldap_servers_conf->basedn = array(
     0 => 'DC=balk,DC=dk',
   );
