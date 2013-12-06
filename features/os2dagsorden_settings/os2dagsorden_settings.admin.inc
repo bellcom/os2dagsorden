@@ -121,12 +121,19 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     );
   }
   $form['#submit'][] = 'os2dagsorden_settings_cron_job_submit';
-  
+
   //Meetig view settings
   $form['os2dagsorden_meeting_view_settings'] = array(
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
       '#title' => t('Meeting view settings'),
+  );
+  
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_all_bullets'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Expand all bullets on agenda'),
+    '#description'=>t('This decides whether a  all bullet points will be expanded'),
+    '#default_value' => variable_get('os2dagsorden_expand_all_bullets', false),
   );
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_attachment'] = array(
@@ -149,6 +156,21 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#default_value' => variable_get('os2dagsorden_show_bilag', true),
   );
   
+  // frontpage layout settings
+  $form['os2dagsorden_frontpage_layout_settings'] = array(
+     '#type' => 'fieldset',
+     '#collapsible' => TRUE,
+     '#title' => t('Frontpage layout and settings'),
+  );
+	$options3 = array('false' => t('Expand'), 'true' => t('Colapse') );
+  $form['os2dagsorden_frontpage_layout_settings']['os2dagsorden_colapse_menu'] = array(
+    '#type' => 'radios',
+    '#title' => t('Colapse/ekspand menu'),
+    '#default_value' => variable_get('os2dagsorden_colapse_menu', true),
+    '#options' => $options3,
+    '#description' => t('This decides whether a side menu expanden/collapsed.'),
+  );
+
   //show or not show meeting category in the calendar
   $form['os2dagsorden_show_meeting_category_settings'] = array(
       '#type' => 'fieldset',
