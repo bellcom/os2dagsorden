@@ -332,7 +332,7 @@ function _os2web_sbsys_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
           $history['body'] .= t('@decision truffet af @comittee d. @date', array(
             '@decision' => (string) $item_history->Caption,
             '@comittee' => (string) $item_history->MeetingDetails->CommitteeName,
-            '@date'     => date('d-m-Y', strtotime((string) $item_history->Created)),
+            '@date'     => date('d-m-Y', strtotime((string) $item_history->MeetingDetails->MeetingConcludedDate)),
           ));
           $history['body'] .= '<br>' . strip_tags((string) $item_history->Content) . '<br>';
           $history['sysid'] = $item_history['ID'] . '-history';
