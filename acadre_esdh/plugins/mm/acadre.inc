@@ -283,12 +283,14 @@ function _acadre_esdh_import_item($info, $xml) {
       	$folder_path .= '/' . $filename_in . '_attachments';// e.g. [...]/1709477.MSG_attachments
 	$files = glob(drupal_realpath($folder_path) . '/*.pdf');
 	foreach($files as $file) {
-	  $item['enclosures'][] = array(
-	    'sysid' => (int) array_shift($enclosure->xpath("fields/field[@name='sysid']")) . '_' . basename($file),
-	    'uri' => $folder_path . '/' . basename($file),
-	    'title' => 'Email_' . basename($file),
-	    'filetype' => '.PDF',
-	  );
+	  if (strpos(basename($file),'eml.part1') === false){//avoiding part1 file import - don't need it
+	    $item['enclosures'][] = array(
+	      'sysid' => (int) array_shift($enclosure->xpath("fields/field[@name='sysid']")) . '_' . basename($file),
+	      'uri' => $folder_path . '/' . basename($file),
+	      'title' => 'Email_' . basename($file),
+	      'filetype' => '.PDF',
+	    );
+	  }
 	}
       } else {
 	$uri = _acadre_esdh_pdf_file_path($folder_path, $filename_in);
