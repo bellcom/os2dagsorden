@@ -203,7 +203,7 @@ function _acadre_esdh_import_meeting($info) {
 			
 	   if (($item = _acadre_esdh_import_item($info, $item_content_xml)) !== FALSE) {
 	$item['agenda_type'] = $meeting['agenda_type'];
-        $meeting['items'][] = $item;
+				 $meeting['items'][] = $item;
       }
     }
     // Apply defaults, just in case we missed something.

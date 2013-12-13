@@ -657,12 +657,12 @@ os2dagsorden_meeting_views_meeting_details_fields_indicator_meeting_has_notes($r
   $handler->display->display_options['fields']['php_2']['field'] = 'php';
   $handler->display->display_options['fields']['php_2']['ui_name'] = 'print meeteng';
   $handler->display->display_options['fields']['php_2']['label'] = 'Hent';
-  $handler->display->display_options['fields']['php_2']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['php_2']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['php_2']['alter']['path'] = 'printpdf/meeting/[nid]/print';
   $handler->display->display_options['fields']['php_2']['alter']['link_class'] = 'hide-on-print';
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php_2']['php_output'] = '<?php echo \'<span class="print-meeting-link">Samlet dokument</span>\'; ?>';
+  $handler->display->display_options['fields']['php_2']['php_output'] = '<?php 
+os2dagsorden_meeting_views_meeting_description_download()
+ ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;

@@ -24,7 +24,20 @@ function os2dagsorden_meeting_views_meeting_details_agenda_and_edit_button(){
     print '<div class="clearfix"></div>';
   }
 }
-
+function os2dagsorden_meeting_views_meeting_description_download(){
+	global $base_url;
+  $q = explode('/',$_GET['q']);
+  $meeting_id = $q[1];
+     $meeting = node_load($meeting_id);
+    
+  //opened version - if not empty
+  if (!empty($meeting->field_meeting_description['und'][0]['uri'])){
+      echo '<a target="_blank" href="' . file_create_url($meeting->field_meeting_description['und'][0]['uri']) . 
+      '" ><span class="print-meeting-link">Samlet dokument</span> </a>';
+  }
+	else 
+		 echo '<a target="_blank" href="/printpdf/meeting/'.$meeting_id.'/print" ><span class="print-meeting-link">Samlet dokument</span> </a>';
+}
 function os2dagsorden_meeting_views_meeting_details_description_download(){
   global $base_url;
   $q = explode('/',$_GET['q']);
@@ -40,7 +53,7 @@ function os2dagsorden_meeting_views_meeting_details_description_download(){
   echo '</div>';
 
   ///////////////////////descriptions (not additional)
-  echo '<div class="controls-right">';
+ echo '<div class="controls-right">';
   //closed version - if not empty
   $meeting = node_load($meeting_id);
   $user_can_see_closed_agendas = os2dagsorden_access_helper_check_user_can_see_closed_agenda($meeting->nid);
@@ -53,10 +66,10 @@ function os2dagsorden_meeting_views_meeting_details_description_download(){
   }
 
   //opened version - if not empty
-  if (!empty($meeting->field_meeting_description['und'][0]['uri'])){
+ /* if (!empty($meeting->field_meeting_description['und'][0]['uri'])){
       echo '<a target="_blank" href="' . file_create_url($meeting->field_meeting_description['und'][0]['uri']) . 
       '" class="form-submit">Hent samlet dokument i PDF</a>';
-  }
+  }*/
   echo '</div>';
   echo '<div class="clearfix"></div>';
 
