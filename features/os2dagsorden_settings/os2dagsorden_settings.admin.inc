@@ -129,6 +129,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
       '#title' => t('Meeting view settings'),
   );
   
+  //meeting view settings
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_all_bullets'] = array(
     '#type' => 'checkbox',
     '#title' => t('Expand all bullets on agenda'),
@@ -155,6 +156,13 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides whether a bullet point attachment converted from PDF to HTML is going to be shown in the application.<br/>Can be useful to disable display if users are known to used old browser versions (>IE8).'),
     '#default_value' => variable_get('os2dagsorden_show_bilag', true),
   );
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_group_closed_bullet_points'] = array(
+    '#type' => 'radios',
+    '#title' => t('Group closed closed bullet points as a separate block'),
+    '#default_value' => variable_get('os2dagsorden_group_closed_bullet_points', 'false'),
+    '#options' => array('true' => t('Group separately'), 'false' => t('Put inline')),
+    '#description' => t('This decides whether closed bullet points will be grouped separately as a additional block called "Lukket dagsorden", or put inline together the rest of the bullet points.'),
+  );
   
   // frontpage layout settings
   $form['os2dagsorden_frontpage_layout_settings'] = array(
@@ -162,7 +170,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
      '#collapsible' => TRUE,
      '#title' => t('Frontpage layout and settings'),
   );
-	$options3 = array('false' => t('Expand'), 'true' => t('Colapse') );
+  $options3 = array('false' => t('Expand'), 'true' => t('Colapse') );
   $form['os2dagsorden_frontpage_layout_settings']['os2dagsorden_colapse_menu'] = array(
     '#type' => 'radios',
     '#title' => t('Colapse/ekspand menu'),
