@@ -19,7 +19,9 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   if (!lock_acquire(__FUNCTION__ . $meeting_id['id'])) {
     return;
   }
+
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
+			
   $nids = array();
   if (is_array($meetings)) {
     foreach ($meetings as $meeting) {
@@ -104,8 +106,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       if ($meeting['participants']){
 	$node->field_meeting_participants[LANGUAGE_NONE][0]['value'] = implode(variable_get('participants_delimeter', ', '), $meeting['participants']);
       }
- 
-      //Adding participants cancellations
+			    //Adding participants cancellations
       if ($meeting['participants_cancellation']){
 	$node->field_participants_cancellation[LANGUAGE_NONE][0]['value'] = implode(variable_get('participants_delimeter', ', '), $meeting['participants_cancellation']);
       }
@@ -113,6 +114,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       // Import items.
       if (is_array($meeting['items'])) {
 	$item_nids = _os2web_esdh_provider_import_items($meeting['items']);
+
 	foreach ($item_nids as $nid) {
 	  $node->field_ref_bullet_points[LANGUAGE_NONE][]['target_id'] = $nid;
 	}
@@ -216,7 +218,6 @@ function os2web_esdh_provider_should_import_description($file_field, $acadre_ver
     return TRUE;
   }
 }
-
 /**
  * Imports item metadata into nodes.
  * @access protected
@@ -238,7 +239,7 @@ function _os2web_esdh_provider_import_items($items) {
     if (isset($result['node'])) {
         $all_nids = array_keys($result['node']);
         $node = reset(entity_load('node', $all_nids));
-        $bullet_point_exists = TRUE;//already existing in the system
+		    $bullet_point_exists = TRUE;//already existing in the system
     }
     else {
         $node = new stdClass();
@@ -291,7 +292,7 @@ function _os2web_esdh_provider_import_items($items) {
     // Gather enclosures.
     foreach ($item['enclosures'] as $enclosure) {
       if ($file = _os2web_esdh_provider_import_file($enclosure)) {
-	$enclosure_nid = _os2web_esdh_provider_add_enclosure_bullet($enclosure, $file);
+	     $enclosure_nid = _os2web_esdh_provider_add_enclosure_bullet($enclosure, $file);
 	
 	$contains = FALSE;
 	if (isset($enclosure_nid)){//if the ID is empty - means that the enclosure has been created before, and hence already added to the bullet point
@@ -326,7 +327,7 @@ function _os2web_esdh_provider_import_items($items) {
       }
     }
     
-    node_submit($node);
+  node_submit($node);
     node_save($node);
     if (!$bullet_point_exists)//only add it if it is not existing in the system, avoiding readding the same node to the meeting
       $nids[] = $node->nid;
@@ -456,7 +457,7 @@ function _os2web_esdh_provider_add_enclosure_bullet($enclosure, $file) {
         $node->field_bpa_id[$node->language][0]['value'] = $enclosure['sysid'];
     }
 
-    $node->title = 'Bilag: ' . $enclosure['title'];
+    $node->title = $enclosure['type'].': ' . $enclosure['title'];
     if ($node->title > 250)
       $node->title = substr($node->title, 0, 250);
        
