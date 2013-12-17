@@ -60,67 +60,69 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
         );
     }
   
-  //cron frequencies
-  $form['os2dagsorden_cron_job_freq'] = array(
-      '#type' => 'fieldset',
-      '#collapsible' => TRUE,
-      '#title' => t('Cron job frequencies settings'),
-  );
-  
-  $options = array(
-    'disabled' => 'Disabled',
-    '*/5 * * * *' => 'Every 5 min',
-    '*/15 * * * *' => 'Every 15 min',
-    '*/30 * * * *' => 'Every 30 min',
-    '0 */1 * * *' => 'Every 1 hour',
-    '0 */2 * * *' => 'Every 2 hours',
-    '0 */3 * * *' => 'Every 3 hours',
-    '0 */5 * * *' => 'Every 5 hours',
-    '0 */10 * * *' => 'Every 10 hours',
-  );
-  
-  if(module_exists('os2dagsorden_importer')){
-    $conf = ultimate_cron_get_settings("os2dagsorden_importer_cron");
-    $form['os2dagsorden_cron_job_freq']['os2dagsorden_importer_cron'] = array(
-        '#type' => 'select',
-        '#options' => $options,
-        '#default_value' => ($conf['enabled'] != '1')? 'disabled' ://disabling, else
-                                (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
-        '#title' => t('Frequency of SOFD import cron job'),
+  if (module_exists('ultimate_cron')){
+    //cron frequencies
+    $form['os2dagsorden_cron_job_freq'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE,
+        '#title' => t('Cron job frequencies settings'),
     );
-  }
-  
-  $conf = ultimate_cron_get_settings("os2web_esdh_provider_cron");
-  $form['os2dagsorden_cron_job_freq']['os2web_esdh_provider_cron'] = array(
-      '#type' => 'select',
-      '#options' => $options,
-      '#default_value' =>  ($conf['enabled'] != '1')? 'disabled' ://disabling, else
-                                (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
-      '#title' => t('Frequency of meeting import cron job'),
-  );
-  
-  if(module_exists('os2dagsorden_pdf2htmlex')){
-    $conf = ultimate_cron_get_settings("os2dagsorden_pdf2htmlex_cron");
-    $form['os2dagsorden_cron_job_freq']['os2dagsorden_pdf2htmlex_cron'] = array(
+    
+    $options = array(
+      'disabled' => 'Disabled',
+      '*/5 * * * *' => 'Every 5 min',
+      '*/15 * * * *' => 'Every 15 min',
+      '*/30 * * * *' => 'Every 30 min',
+      '0 */1 * * *' => 'Every 1 hour',
+      '0 */2 * * *' => 'Every 2 hours',
+      '0 */3 * * *' => 'Every 3 hours',
+      '0 */5 * * *' => 'Every 5 hours',
+      '0 */10 * * *' => 'Every 10 hours',
+    );
+    
+    if(module_exists('os2dagsorden_importer')){
+      $conf = ultimate_cron_get_settings("os2dagsorden_importer_cron");
+      $form['os2dagsorden_cron_job_freq']['os2dagsorden_importer_cron'] = array(
+          '#type' => 'select',
+          '#options' => $options,
+          '#default_value' => ($conf['enabled'] != '1')? 'disabled' ://disabling, else
+                                  (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
+          '#title' => t('Frequency of SOFD import cron job'),
+      );
+    }
+    
+    $conf = ultimate_cron_get_settings("os2web_esdh_provider_cron");
+    $form['os2dagsorden_cron_job_freq']['os2web_esdh_provider_cron'] = array(
         '#type' => 'select',
         '#options' => $options,
         '#default_value' =>  ($conf['enabled'] != '1')? 'disabled' ://disabling, else
-                                (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
-        '#title' => t('Frequency of PDF to HTML conversion cron job'), 
+                                  (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
+        '#title' => t('Frequency of meeting import cron job'),
     );
+    
+    if(module_exists('os2dagsorden_pdf2htmlex')){
+      $conf = ultimate_cron_get_settings("os2dagsorden_pdf2htmlex_cron");
+      $form['os2dagsorden_cron_job_freq']['os2dagsorden_pdf2htmlex_cron'] = array(
+          '#type' => 'select',
+          '#options' => $options,
+          '#default_value' =>  ($conf['enabled'] != '1')? 'disabled' ://disabling, else
+                                  (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
+          '#title' => t('Frequency of PDF to HTML conversion cron job'), 
+      );
+    }
+    
+    if(module_exists('os2dagsorden_adlib_api')){
+      $conf = ultimate_cron_get_settings("os2dagsorden_adlib_api_cron");
+      $form['os2dagsorden_cron_job_freq']['os2dagsorden_adlib_api_cron'] = array(
+          '#type' => 'select',
+          '#options' => $options,
+          '#default_value' =>  ($conf['enabled'] != '1')? 'disabled' ://disabling, else
+                                  (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
+          '#title' => t('Frequency of Adlib (* to PDF) conversion cron job'), 
+      );
+    }
+    $form['#submit'][] = 'os2dagsorden_settings_cron_job_submit';
   }
-  
-  if(module_exists('os2dagsorden_adlib_api')){
-    $conf = ultimate_cron_get_settings("os2dagsorden_adlib_api_cron");
-    $form['os2dagsorden_cron_job_freq']['os2dagsorden_adlib_api_cron'] = array(
-        '#type' => 'select',
-        '#options' => $options,
-        '#default_value' =>  ($conf['enabled'] != '1')? 'disabled' ://disabling, else
-                                (isset($conf['rules'])? implode(';', $conf['rules']) : variable_get('ultimate_cron_rule', ULTIMATE_CRON_RULE)),
-        '#title' => t('Frequency of Adlib (* to PDF) conversion cron job'), 
-    );
-  }
-  $form['#submit'][] = 'os2dagsorden_settings_cron_job_submit';
 
   //Meetig view settings
   $form['os2dagsorden_meeting_view_settings'] = array(
