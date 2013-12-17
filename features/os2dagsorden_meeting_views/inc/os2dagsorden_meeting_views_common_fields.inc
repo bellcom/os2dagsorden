@@ -51,26 +51,6 @@ function os2dagsorden_meeting_views_common_meeting_title_listed($data){
       echo $title;
   }
 }
-function os2dagsorden_meeting_views_common_meeting_title_short_listed($data){
-  $title = '';
-  if (isset($data->_field_data['nid']['entity']->field_title_short['und']))
-    $title = $data->_field_data['nid']['entity']->field_title_short['und'][0]['value'];
-  else 
-    $title = $data->_field_data['nid']['entity']->title;
-
-  //logic for touch devices
-  if (os2dagsorden_access_helper_is_touch()){
-    if (mb_strlen($title) > 11)
-      echo mb_substr($title, 0, 8) . '...';
-    else
-      echo $title;
-  } else {//desktop device
-    if (mb_strlen($title) > 24)
-      echo mb_substr($title, 0, 21) . '...';
-    else
-      echo $title;
-  }
-}
 /////////////////////////////////////////meeting END/////////////////////////////////////////
 
 /////////////////////////////////////////bullet point START/////////////////////////////////////////
