@@ -307,7 +307,7 @@ function _acadre_esdh_import_item($info, $xml) {
 						$files = glob(drupal_realpath($folder_path) . '/*.pdf');
 						foreach ($files as $file) {
 							if (strpos(basename($file), 'eml.part1') === false) {//avoiding part1 file import - don't need it
-								$item['enclosures'][] = array(
+								$item['cases'][] = array(
 										'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")) . '_' . basename($file),
 										'uri' => $folder_path . '/' . basename($file),
 										'title' => 'Email_' . basename($file),
