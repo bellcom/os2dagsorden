@@ -300,10 +300,10 @@ function os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachme
   }
 }
 function os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link($meeting_id, $bp_id){
-  global $base_url;
-  return os2dagsorden_access_helper_check_user_can_see_bullet_point($meeting_id, $bp_id);
-   
+  if (os2dagsorden_access_helper_check_user_can_see_bullet_point($meeting_id, $bp_id)){
+    print '<span class="bullet-point-print-link">&nbsp</span>';
   }
+}
 
 function os2dagsorden_meeting_views_meeting_details_fields_speaker_paper_link($meeting_id, $bp_id, $bp_title){
   global $base_url;

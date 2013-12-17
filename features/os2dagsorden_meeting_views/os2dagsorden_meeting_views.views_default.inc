@@ -651,17 +651,17 @@ os2dagsorden_meeting_views_meeting_details_fields_indicator_meeting_has_notes($r
   $handler->display->display_options['fields']['field_meeting_status']['table'] = 'field_data_field_meeting_status';
   $handler->display->display_options['fields']['field_meeting_status']['field'] = 'field_meeting_status';
   $handler->display->display_options['fields']['field_meeting_status']['label'] = 'Type';
-  /* Felt: print meeteng */
+  /* Felt: Samlet dokument link */
   $handler->display->display_options['fields']['php_2']['id'] = 'php_2';
   $handler->display->display_options['fields']['php_2']['table'] = 'views';
   $handler->display->display_options['fields']['php_2']['field'] = 'php';
-  $handler->display->display_options['fields']['php_2']['ui_name'] = 'print meeteng';
+  $handler->display->display_options['fields']['php_2']['ui_name'] = 'Samlet dokument link';
   $handler->display->display_options['fields']['php_2']['label'] = 'Hent';
   $handler->display->display_options['fields']['php_2']['alter']['path'] = 'printpdf/meeting/[nid]/print';
   $handler->display->display_options['fields']['php_2']['alter']['link_class'] = 'hide-on-print';
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php 
-os2dagsorden_meeting_views_meeting_description_download()
+os2dagsorden_meeting_views_meeting_description_download();
  ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
@@ -1119,25 +1119,23 @@ os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachments_with_
 ?>';
   $handler->display->display_options['fields']['php_3']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_3']['php_click_sortable'] = '';
-  /* Felt: Global: PHP (Send to friend link) */
+  /* Felt: Print bullet point link */
   $handler->display->display_options['fields']['php_5']['id'] = 'php_5';
   $handler->display->display_options['fields']['php_5']['table'] = 'views';
   $handler->display->display_options['fields']['php_5']['field'] = 'php';
-  $handler->display->display_options['fields']['php_5']['ui_name'] = 'Global: PHP (Send to friend link)';
+  $handler->display->display_options['fields']['php_5']['ui_name'] = 'Print bullet point link';
   $handler->display->display_options['fields']['php_5']['label'] = '';
   $handler->display->display_options['fields']['php_5']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['php_5']['alter']['path'] = 'print/meeting/[nid_1]/bullet-point/[nid]/print';
   $handler->display->display_options['fields']['php_5']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['php_5']['element_class'] = 'print-bullet-point-link';
   $handler->display->display_options['fields']['php_5']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php_5']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_5']['php_output'] = '<?php
 $meeting_id = $row->nid_1;
 $bp_id = $row->nid;
-if (function_exists(\'os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link\')){
-   if (os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link($meeting_id,$bp_id )){
-     echo \'<span class="bullet-point-print-link">&nbsp</span>\';
-  }
-}
+
+os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link($meeting_id, $bp_id);
 ?>
 ';
   $handler->display->display_options['fields']['php_5']['use_php_click_sortable'] = '0';
@@ -1422,6 +1420,7 @@ os2dagsorden_meeting_views_meeting_details_fields_bullet_point_title($title, $me
 ?>';
   $handler->display->display_options['fields']['php_4']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_4']['php_click_sortable'] = '';
+<<<<<<< HEAD
   /* Felt: bullet point attachments with text */
   $handler->display->display_options['fields']['php_3']['id'] = 'php_3';
   $handler->display->display_options['fields']['php_3']['table'] = 'views';
@@ -1450,6 +1449,40 @@ os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachments_with_
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php
 $meeting_id = $row->nid_1;
 $bp_id = $row->nid;
+=======
+  /* Felt: Print bullet point link */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['ui_name'] = 'Print bullet point link';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['php']['alter']['path'] = 'print/meeting/[nid]/bullet-point/[nid_1]/print';
+  $handler->display->display_options['fields']['php']['element_class'] = 'print-bullet-point-link';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$meeting_id = $row->nid;
+$bp_id = $row->nid_1;
+
+os2dagsorden_meeting_views_meeting_details_fields_print_send_to_friend_link($meeting_id, $bp_id);
+?>
+';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Felt: speaker paper link */
+  $handler->display->display_options['fields']['php_5']['id'] = 'php_5';
+  $handler->display->display_options['fields']['php_5']['table'] = 'views';
+  $handler->display->display_options['fields']['php_5']['field'] = 'php';
+  $handler->display->display_options['fields']['php_5']['ui_name'] = 'speaker paper link';
+  $handler->display->display_options['fields']['php_5']['label'] = '';
+  $handler->display->display_options['fields']['php_5']['element_class'] = 'speaker-paper-link-container';
+  $handler->display->display_options['fields']['php_5']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php_5']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_5']['php_output'] = '<?php
+$meeting_id = $row->nid;
+$bp_id = $row->nid_1;
+>>>>>>> a36bd626d9e32412808de0a2c3a5a2c23372cebf
 $bp_title = $row->title;
 
 os2dagsorden_meeting_views_meeting_details_fields_speaker_paper_link($meeting_id, $bp_id, $bp_title);
