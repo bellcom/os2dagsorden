@@ -21,8 +21,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   }
 
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
-			
-  $nids = array();
+
+	$nids = array();
   if (is_array($meetings)) {
     foreach ($meetings as $meeting) {
       //trying to get meeting from sysid
