@@ -92,7 +92,7 @@ function os2dagsorden_meeting_views_meetings_search_fields_meeting_has_notes($me
 }
 
 function os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data){
-  os2dagsorden_meeting_views_common_meeting_title_listed($data);
+  os2dagsorden_meeting_views_common_meeting_title_short_listed($data);
 }
 
 function os2dagsorden_meeting_views_meetings_search_fields_placering($meta_data){
