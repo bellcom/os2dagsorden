@@ -311,7 +311,7 @@ function _acadre_esdh_import_item($info, $xml) {
 						$files = glob(drupal_realpath($folder_path) . '/*.pdf');
 						foreach ($files as $file) {
 							if (strpos(basename($file), 'eml.part1') === false) {//avoiding part1 file import - don't need it
-								$item['cases'][] = array(
+								$item['enclosures'][] = array(
 										'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")) . '_' . basename($file),
 										'uri' => $folder_path . '/' . basename($file),
 										'title' => 'Email_' . basename($file),
@@ -322,8 +322,8 @@ function _acadre_esdh_import_item($info, $xml) {
 						}
 					} else {
 						$uri = _acadre_esdh_pdf_file_path($folder_path, $filename_in);
-						$item['cases'][] = array(
-								'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")),
+						$item['enclosures'][] = array(
+								'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")). '_' . basename(trim((string) array_shift($case_file->xpath("fields/field[@name='FileNr']")))),
 								'uri' => $uri,
 								'title' => trim((string) array_shift($case_file->xpath("fields/field[@name='Title']"))),
 								'filetype' => "." . (string) array_shift($case_file->xpath("fields/field[@name='DocumentExtension']")),
@@ -432,7 +432,7 @@ function _acadre_esdh_import_case($info, $bullet_xml) {
 function _acadre_esdh_pdf_file_path($path, $name){
   $name_arr = explode('.', $name);
   
-  $pdf_path = $path . '/' . $name_arr[0] . '.pdf';
+  $pdf_path = $path . '/' . $name_arr[0] . '.PDF';
   if (_acadre_esdh_similar_file_exists(drupal_realpath($pdf_path)))
     return $pdf_path;
   else
