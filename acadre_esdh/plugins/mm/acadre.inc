@@ -432,7 +432,7 @@ function _acadre_esdh_import_case($info, $bullet_xml) {
 function _acadre_esdh_pdf_file_path($path, $name){
   $name_arr = explode('.', $name);
   
-  $pdf_path = $path . '/' . $name_arr[0] . '.pdf';
+  $pdf_path = $path . '/' . $name_arr[0] . '.PDF';
   if (_acadre_esdh_similar_file_exists(drupal_realpath($pdf_path)))
     return $pdf_path;
   else
