@@ -878,6 +878,7 @@ os2dagsorden_meeting_views_meeting_details_fields_participants_deltog($row->nid)
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['row_class'] = 'bulletpoint-row';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid_1' => 'nid_1',
     'nid' => 'nid',
@@ -889,6 +890,7 @@ os2dagsorden_meeting_views_meeting_details_fields_participants_deltog($row->nid)
     'title' => 'title',
     'php_4' => 'php_4',
     'php_3' => 'php_4',
+    'php_5' => 'php_5',
     'php_2' => 'php_2',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -949,6 +951,11 @@ os2dagsorden_meeting_views_meeting_details_fields_participants_deltog($row->nid)
       'empty_column' => 0,
     ),
     'php_3' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php_5' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1194,6 +1201,7 @@ os2dagsorden_meeting_views_meeting_details_fields_speaker_paper_link($meeting_id
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['row_class'] = 'bulletpoint-row';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
     'nid_1' => 'nid_1',
@@ -1205,6 +1213,7 @@ os2dagsorden_meeting_views_meeting_details_fields_speaker_paper_link($meeting_id
     'title' => 'title',
     'php_3' => 'php_3',
     'php_4' => 'php_3',
+    'php' => 'php',
     'php_5' => 'php_5',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -1265,6 +1274,11 @@ os2dagsorden_meeting_views_meeting_details_fields_speaker_paper_link($meeting_id
       'empty_column' => 0,
     ),
     'php_4' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2628,12 +2642,12 @@ print \'<a href="\' . $base_url . \'?q=node/add/speaker-paper&edit[field_ref_bul
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['row_class'] = 'bulletpoint-row';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid_1' => 'nid_1',
     'field_bul_point_closed' => 'title',
     'field_bul_point_personal' => 'title',
     'title' => 'title',
-    'php_1' => 'title',
     'php' => 'title',
     'body' => 'title',
     'php_2' => 'title',
@@ -2664,11 +2678,6 @@ print \'<a href="\' . $base_url . \'?q=node/add/speaker-paper&edit[field_ref_bul
     'title' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'php_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
