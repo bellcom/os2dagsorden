@@ -253,15 +253,15 @@ function os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachme
       
       if ($bullet_point->title !== 'Bilag' && $bullet_point->title !== 'Sager'){
 	if (!empty($bilags)){
-	  _os2dagsorden_meeting_views_meeting_deatails_bilag_cases_bullet_point('Bilag', $bilags, $meeting_id, $bp_id);
+	  _os2dagsorden_meeting_views_meeting_details_bilag_cases_bullet_point('Bilag', $bilags, $meeting_id, $bp_id);
 	}
   
 	if (!empty($cases)){
-	  _os2dagsorden_meeting_views_meeting_deatails_bilag_cases_bullet_point('Sager', $cases, $meeting_id, $bp_id);
+	  _os2dagsorden_meeting_views_meeting_details_bilag_cases_bullet_point('Sager', $cases, $meeting_id, $bp_id);
 	}
       } else {
-	_os2dagsorden_meeting_views_meeting_deatails_bilag_cases_bullet_point($bilags, $meeting_id, $bp_id);
-	_os2dagsorden_meeting_views_meeting_deatails_bilag_cases_bullet_point($cases, $meeting_id, $bp_id);
+	_os2dasorden_meeting_views_meeting_details_bilag_cases_with_content($bilags, $meeting_id, $bp_id);
+	_os2dasorden_meeting_views_meeting_details_bilag_cases_with_content($cases, $meeting_id, $bp_id);
       }
 
       print '</div>';
@@ -271,7 +271,7 @@ function os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachme
   }
 }
 
-function _os2dagsorden_meeting_views_meeting_deatails_bilag_cases_bullet_point($bp_title, $elements, $meeting_id, $bp_id){
+function _os2dagsorden_meeting_views_meeting_details_bilag_cases_bullet_point($bp_title, $elements, $meeting_id, $bp_id){
   print '<li class="bilags_cases">';
   print '<div class="indicator-has-no-notes"></div>';
   print '<a class="first-child last-child">' . $bp_title. '</a>';
