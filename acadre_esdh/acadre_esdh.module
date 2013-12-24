@@ -46,7 +46,22 @@ function acadre_esdh_form_os2web_settings_settings_form_alter(&$form, &$form_sta
     '#description' => 'Komma sepereret liste over udvalgs-id der er godkendt til publisering.',
     '#default_value' => variable_get('os2web_meetings_approved_committee', ACADRE_MM_DEFAULT_APPROVED),
   );
-
+	$form['os2web_case_bilag_import'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Case/Bilag import configuration'),
+  );
+$form['os2web_case_bilag_import']['os2web_case_import'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Import cases to separate bullet point'),
+    '#description'=>t('This decides whether all cases of meetigs imported to separate bullet point or under each agend point.'),
+    '#default_value' => variable_get('os2web_case_import', false),
+ );
+$form['os2web_case_bilag_import']['os2web_bilag_import'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Import bilag to separate bullet point'),
+    '#description'=>t('This decides whether all bilags of meetigs imported to separate bullet point or under each agend point.'),
+    '#default_value' => variable_get('os2web_bilag_import', false),
+ );
   $form['os2web_pws_adlib_group'] = array(
     '#type' => 'fieldset',
     '#title' => t('Adlib Endpoint configuration'),
