@@ -198,7 +198,7 @@ function _acadre_esdh_import_meeting($info) {
     }
     
     //Participants
-    $participants = $xml->xpath("//table[@name='committee']/table[@name='commember']/table[@name='member']");
+    $participants = $xml->xpath(variable_get('os2web_meetings_participants_import_path', "//table[@name='committee']/table[@name='commember']/table[@name='member']"));
     foreach ($participants as $participant) {
 	$meeting['participants'][] = (string) array_shift($participant->xpath("fields/field[@name='name']"));
     }
@@ -353,41 +353,41 @@ function _acadre_esdh_import_item($info, $xml) {
   }
 
   foreach ($xml->xpath("table[@name='Case']") as $case_xml) {
-		if (($bullet = _acadre_esdh_import_case($info, $case_xml)) !== FALSE) {
-			$item['bullets'][] = $bullet;
-			foreach ($case_xml->xpath("table[@name='Files']/table[@name='File']")as $case_file) {
-				$filename_in = (string) array_shift($case_file->xpath("fields/field[@name='FileName']"));
-				if (strlen($filename_in) > 0) {
-					$filetype = (string) array_shift($case_file->xpath("fields/field[@name='DocumentExtension']"));
-					$folder_path = implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $info['filesfolder']));
-					if (strcasecmp($filetype, 'MSG') == 0) {
-						$folder_path .= '/' . $filename_in . '_attachments'; // e.g. [...]/1709477.MSG_attachments
-						$files = glob(drupal_realpath($folder_path) . '/*.pdf');
-						foreach ($files as $file) {
-							if (strpos(basename($file), 'eml.part1') === false) {//avoiding part1 file import - don't need it
-								$item['cases'][] = array(
-										'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")) . '_' . basename($file),
-										'uri' => $folder_path . '/' . basename($file),
-										'title' => 'Email_' . basename($file),
-										'filetype' => '.PDF',
-										'type' => 'Sag',
-								);
-							}
-						}
-					} else {
-						$uri = _acadre_esdh_pdf_file_path($folder_path, $filename_in);
-						$item['cases'][] = array(
-								'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")). '_' . basename(trim((string) array_shift($case_file->xpath("fields/field[@name='FileNr']")))),
-								'uri' => $uri,
-								'title' => trim((string) array_shift($case_file->xpath("fields/field[@name='Title']"))),
-								'filetype' => "." . (string) array_shift($case_file->xpath("fields/field[@name='DocumentExtension']")),
-								'type' => 'Sag',
-						);
-					}
-				}
-			}
-		}
+    //if (($bullet = _acadre_esdh_import_case($info, $case_xml)) !== FALSE) {
+    //	$item['bullets'][] = $bullet;
+      foreach ($case_xml->xpath("table[@name='Files']/table[@name='File']")as $case_file) {
+	$filename_in = (string) array_shift($case_file->xpath("fields/field[@name='FileName']"));
+	if (strlen($filename_in) > 0) {
+	  $filetype = (string) array_shift($case_file->xpath("fields/field[@name='DocumentExtension']"));
+	  $folder_path = implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $info['filesfolder']));
+	  if (strcasecmp($filetype, 'MSG') == 0) {
+	    $folder_path .= '/' . $filename_in . '_attachments'; // e.g. [...]/1709477.MSG_attachments
+	    $files = glob(drupal_realpath($folder_path) . '/*.pdf');
+	    foreach ($files as $file) {
+	      if (strpos(basename($file), 'eml.part1') === false) {//avoiding part1 file import - don't need it
+		$item['cases'][] = array(
+		  'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")) . '_' . basename($file),
+		  'uri' => $folder_path . '/' . basename($file),
+		  'title' => 'Email_' . basename($file),
+		  'filetype' => '.PDF',
+		  'type' => 'Sag',
+		);
+	      }
+	    }
+	  } else {
+	    $uri = _acadre_esdh_pdf_file_path($folder_path, $filename_in);
+	    $item['cases'][] = array(
+	      'sysid' => (int) array_shift($case_file->xpath("fields/field[@name='ID']")). '_' . basename(trim((string) array_shift($case_file->xpath("fields/field[@name='FileNr']")))),
+	      'uri' => $uri,
+	      'title' => trim((string) array_shift($case_file->xpath("fields/field[@name='Title']"))),
+	      'filetype' => "." . (string) array_shift($case_file->xpath("fields/field[@name='DocumentExtension']")),
+	      'type' => 'Sag',
+	    );
+	  }
 	}
+      }
+    //}
+  }
 		
   // Process enclosures.
   foreach ($xml->xpath("table[@name='enclosure']") as $enclosure) {
@@ -450,9 +450,9 @@ function _acadre_esdh_import_bullet($info, $bullet_xml) {
     'sysid' => (int) array_shift($bullet_xml->xpath("fields/field[@name='sysid']")),
   );
   if ($bullet['body'] === '') {
-	    return FALSE;
+    return FALSE;
   }
-	$bullet['body']=  _acadre_esdh_mm_improve_body_html($bullet['body']);
+  $bullet['body']=  _acadre_esdh_mm_improve_body_html($bullet['body']);
 
   $bullet += os2web_esdh_provider_default_bullet();
   return $bullet;
