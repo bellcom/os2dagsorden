@@ -73,7 +73,7 @@ function os2dagsorden_meeting_views_bullet_point_fields_attachments_and_content(
 
       if (!empty($attachment->field_bpa_file['und'])){// if is bilag
 	//saving bilags to the end
-	if (strpos($attachment->title, "Bilag") === 0)
+	if (stripos($attachment->title, "Bilag") === 0)
           $bilags[] = $attachment;
 	else
 	  $cases[] = $attachment;

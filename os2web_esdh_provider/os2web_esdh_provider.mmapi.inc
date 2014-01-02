@@ -456,8 +456,12 @@ function _os2web_esdh_provider_add_enclosure_bullet($enclosure, $file) {
         node_object_prepare($node);
         $node->field_bpa_id[$node->language][0]['value'] = $enclosure['sysid'];
     }
+    
+    if (variable_get('os2dagsorden_add_type_prefix', 'true') === 'true')
+      $node->title = $enclosure['type'].': ' . $enclosure['title'];
+    else
+      $node->title = $enclosure['title'];
 
-    $node->title = $enclosure['type'].': ' . $enclosure['title'];
     if ($node->title > 250)
       $node->title = substr($node->title, 0, 250);
        

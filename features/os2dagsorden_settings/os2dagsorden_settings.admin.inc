@@ -138,6 +138,13 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides whether a  all bullet points will be expanded'),
     '#default_value' => variable_get('os2dagsorden_expand_all_bullets', false),
   );
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_bilag_sag_bullet'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Expand Bilag/Sag bullet point'),
+    '#description'=>t('This decides whether a Bilag/Sag bullet point will be expanded on the page load'),
+    '#default_value' => variable_get('os2dagsorden_expand_bilag_sag_bullet', true),
+  );
+
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_attachment'] = array(
     '#type' => 'radios',
@@ -217,19 +224,26 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
   );
   $form['os2dagsorden_meeting_import']['os2dagsorden_send_notification_committee'] = array(
     '#type' => 'textfield',
-    '#title' => 'Send notification of committees',
+    '#title' => t('Send notification of committees'),
     '#maxlength' => 200,
-    '#description' => 'Comma-separated list of committees ID changing status of which should send an email notification.',
+    '#description' => t('Comma-separated list of committees ID changing status of which should send an email notification.'),
     '#default_value' => variable_get('os2dagsorden_send_notification_committee', ''),
   );
   $form['os2dagsorden_meeting_import']['os2dagsorden_send_timespan_of_notification'] = array(
     '#type' => 'textfield',
-    '#title' => 'Meeting should be not older than:',
+    '#title' => t('Meeting should be not older than:'),
     '#maxlength' => 200,
     '#field_suffix' => 'Days',
     '#size' => 10,
-    '#description' => 'If meeting is not older than the set amount of day, notification is sent. <br/>Otherwise notification process is skipped',
+    '#description' => t('If meeting is not older than the set amount of day, notification is sent. <br/>Otherwise notification process is skipped'),
     '#default_value' => variable_get('os2dagsorden_send_timespan_of_notification', 10),
+  );
+  $form['os2dagsorden_meeting_import']['os2dagsorden_add_type_prefix'] = array(
+    '#type' => 'radios',
+    '#title' => t('Add prefix to Bilag/Sag bullet point attachments'),
+    '#options' => array('true' => t('Add <i>Bilag/Sag</i> prefix'), 'false' => t('Add no prefix')),
+    '#description' => t('This decides whether the will be added a prefix to Bilag or Case bullet point attachment on import.<br/>e.g. <b>Bilag:</b> Indsigelser of Bemaerkninger.'),
+    '#default_value' => variable_get('os2dagsorden_add_type_prefix', 'true'),
   );
   
   //hidden agenda
