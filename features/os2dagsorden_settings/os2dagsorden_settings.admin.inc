@@ -144,6 +144,12 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides whether a Bilag/Sag bullet point will be expanded on the page load'),
     '#default_value' => variable_get('os2dagsorden_expand_bilag_sag_bullet', true),
   );
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_sager_group_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Sager group title'),
+    '#description'=>t('This decides how a group of Cases/Sager will be titled'),
+    '#default_value' => variable_get('os2dagsorden_sager_group_title', 'Sager'),
+  );
 
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_attachment'] = array(

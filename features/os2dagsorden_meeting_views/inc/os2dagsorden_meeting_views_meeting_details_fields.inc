@@ -250,14 +250,13 @@ function os2dagsorden_meeting_views_meeting_details_fields_bullet_point_attachme
 	  print '</li>';
 	}
       }
-      
       if ($bullet_point->title !== 'Bilag' && $bullet_point->title !== 'Sager'){
 	if (!empty($bilags)){
 	  _os2dagsorden_meeting_views_meeting_details_bilag_cases_bullet_point('Bilag', $bilags, $meeting_id, $bp_id);
 	}
   
 	if (!empty($cases)){
-	  _os2dagsorden_meeting_views_meeting_details_bilag_cases_bullet_point('Sager', $cases, $meeting_id, $bp_id);
+	  _os2dagsorden_meeting_views_meeting_details_bilag_cases_bullet_point(variable_get('os2dagsorden_sager_group_title', 'Sager'), $cases, $meeting_id, $bp_id);
 	}
       } else {
 	_os2dasorden_meeting_views_meeting_details_bilag_cases_with_content($bilags, $meeting_id, $bp_id);

@@ -117,7 +117,7 @@ function os2dagsorden_meeting_views_bullet_point_fields_attachments_and_content(
       }
   
       if (!empty($cases)){
-	_os2dagsorden_meeting_views_bullet_point_bilag_cases_bullet_point('Sager', $cases, $meeting_id, $bp_id);
+	_os2dagsorden_meeting_views_bullet_point_bilag_cases_bullet_point(variable_get('os2dagsorden_sager_group_title', 'Sager'), $cases, $meeting_id, $bp_id);
       }
     } else {
       _os2dagsorden_meeting_views_bullet_point_bilag_cases_with_content($bilags, $meeting_id, $bp_id);
