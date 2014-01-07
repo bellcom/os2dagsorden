@@ -121,12 +121,20 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     );
   }
   $form['#submit'][] = 'os2dagsorden_settings_cron_job_submit';
-  
+
   //Meetig view settings
   $form['os2dagsorden_meeting_view_settings'] = array(
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
       '#title' => t('Meeting view settings'),
+  );
+  
+  //meeting view settings
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_all_bullets'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Expand all bullets on agenda'),
+    '#description'=>t('This decides whether a  all bullet points will be expanded'),
+    '#default_value' => variable_get('os2dagsorden_expand_all_bullets', false),
   );
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_attachment'] = array(
@@ -136,6 +144,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' => $options,
     '#description' => t('This decides whether a certain type of bullet point attachment - bilag will be expanded (activated) when functionality "Expand whole bullet point" is executed.'),
   );
+
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_print_icon'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show print icon on bullets in agenda'),
@@ -147,8 +156,30 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#title' => t('Show bullet point attachment (bilag) on meeting view and bullet point attachment views'),
     '#description'=>t('This decides whether a bullet point attachment converted from PDF to HTML is going to be shown in the application.<br/>Can be useful to disable display if users are known to used old browser versions (>IE8).'),
     '#default_value' => variable_get('os2dagsorden_show_bilag', true),
+);
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_group_closed_bullet_points'] = array(
+    '#type' => 'radios',
+    '#title' => t('Group closed closed bullet points as a separate block'),
+    '#default_value' => variable_get('os2dagsorden_group_closed_bullet_points', 'false'),
+    '#options' => array('true' => t('Group separately'), 'false' => t('Put inline')),
+    '#description' => t('This decides whether closed bullet points will be grouped separately as a additional block called "Lukket dagsorden", or put inline together the rest of the bullet points.'),
+
   );
   
+  // frontpage layout settings
+  $form['os2dagsorden_frontpage_layout_settings'] = array(
+     '#type' => 'fieldset',
+     '#collapsible' => TRUE,
+     '#title' => t('Frontpage layout and settings'),
+  );
+  $options3 = array('false' => t('Expand'), 'true' => t('Colapse') );
+  $form['os2dagsorden_frontpage_layout_settings']['os2dagsorden_colapse_menu'] = array(
+    '#type' => 'radios',
+    '#title' => t('Colapse/ekspand menu'),
+    '#default_value' => variable_get('os2dagsorden_colapse_menu', true),
+    '#options' => $options3,
+    '#description' => t('This decides whether a side menu expanden/collapsed.'),
+  );
   //show or not show meeting category in the calendar
   $form['os2dagsorden_show_meeting_category_settings'] = array(
       '#type' => 'fieldset',
