@@ -107,6 +107,9 @@ function os2web_edoc_esdh_mm_import_meeting($meeting) {
 	//$meeting_id = $meeting_agenda->xpath('MeetingAgendaItems/MeetingAgendaItem/Document/@documentid');
 	//$meeting_id = (string) $meeting_id[0][documentid];
 	$meeting_id = crc32($meeting_date . ' ' . $committee);//generated meeting_id
+        if ($meeting_id > 2147483647){
+          $meeting_id = substr($meeting_id, 0,9);//mysql int out of range fix
+        }
 	$meeting_pdf = $meeting_agenda->xpath('PDFDocument');
 	$meeting_pdf = (string) $meeting_pdf[0];
 	$meeting_state = $meeting_agenda->xpath('AgendaType');
