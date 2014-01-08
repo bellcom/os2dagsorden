@@ -160,8 +160,7 @@ function _acadre_esdh_import_meeting($info) {
 		$publish_committee = array_map('trim', explode(',', variable_get('os2web_meetings_approved_committee', ACADRE_MM_DEFAULT_APPROVED)));
     if ($meeting['committee'] == '' || !in_array($meeting['committee_id'], $publish_committee)) {
       watchdog('acadre MM', 'Ignored agenda from %committee .', array('%committee' => $meeting['committee']));
-      echo 'acadre MM', 'Ignored agenda from %committee '.$meeting['committee'];
-			return FALSE;
+    return FALSE;
     }
 		
 	
