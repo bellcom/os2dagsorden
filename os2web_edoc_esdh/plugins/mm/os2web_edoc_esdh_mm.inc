@@ -249,9 +249,8 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
 
   if(variable_get('os2web_edoc_esdh_headline_words', FALSE)){
     $words = variable_get('os2web_edoc_esdh_headline_words');
-    $words = explode(',', $words);
 
-    $regex = '/(^|\n)(' . implode('|', $words) . ')\n/';
+    $regex = '/(^|\n)(' . str_replace(',', '|', $words) . ')\n/';
 
     $xml_item['full_text'] = preg_replace($regex, '<b>$0</b>', $xml_item['full_text']);
   }
