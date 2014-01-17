@@ -46,14 +46,14 @@ function os2web_edoc_esdh_mm_get_import_list() {
 
 
 /**
- * Strip illegal characters from the XML. 
+ * Strip illegal characters from the XML.
  * Ex &#xC = ASCII new line feed
- * 
+ *
  * @param object $string
  *   string to sanitise
- * 
+ *
  * $return array
- *   The string sanitised 
+ *   The string sanitised
  */
 function utf8_for_xml($string)
 {
@@ -79,9 +79,9 @@ function os2web_edoc_esdh_mm_import_meeting($meeting) {
   }
   $meetings = array();
   if (is_file(drupal_realpath($file))) {
-    
+
     libxml_use_internal_errors(true);
-    $manifest = simplexml_load_string(utf8_for_xml(file_get_contents(drupal_realpath($file))), 'SimpleXMLElement', LIBXML_NOWARNING); 
+    $manifest = simplexml_load_string(utf8_for_xml(file_get_contents(drupal_realpath($file))), 'SimpleXMLElement', LIBXML_NOWARNING);
 
     libxml_clear_errors();
     libxml_use_internal_errors(false);
@@ -113,19 +113,19 @@ function os2web_edoc_esdh_mm_import_meeting($meeting) {
 	$meeting_pdf = $meeting_agenda->xpath('PDFDocument');
 	$meeting_pdf = (string) $meeting_pdf[0];
 	$meeting_state = $meeting_agenda->xpath('AgendaType');
-	$meeting_state = (string) $meeting_state[0]; 
+	$meeting_state = (string) $meeting_state[0];
 	$meeting_type = $manifest->xpath('/Meeting/MeetingState');
 	$meeting_type = (string) $meeting_type[0];
 	$acadre_version = (string) array_shift(explode('.', $meeting_pdf));
-      
+
 	if (stripos($meeting_state, 'lukket') !== FALSE)
 	  $agenda_access = 'Lukket';
-	else 
+	else
 	  $agenda_access = 'Åben';
-	  
+
 	// Collecting agenda items
 	$meeting_agendas_items = $meeting_agenda->xpath('MeetingAgendaItems'); //$manifest->xpath("/Meeting/MeetingAgendaTypes/MeetingAgendaType/MeetingAgendaItems");
-	
+
 	// Check if the committee is allowed to publish.
 	$publish_committee = array_map('trim', explode(',', variable_get('os2web_edoc_esdh_approved_committees', MM_DEFAULT_APPROVED)));
 	if ($committee == '' || !in_array($committee, $publish_committee)) {
@@ -137,7 +137,7 @@ function os2web_edoc_esdh_mm_import_meeting($meeting) {
 	$date_obj = date_create($meeting_date);
 	//date_timezone_set($date_obj, timezone_open('UTC'));
 	$meeting_date = date_format($date_obj, 'Y-m-d H:i');
-	
+
 	// Changing the meeting state to match ESDH Provider module
 	if($meeting_type == "Referat endeligt godkendt") {
 	  $meeting_type = "Referat";
@@ -145,8 +145,8 @@ function os2web_edoc_esdh_mm_import_meeting($meeting) {
 	else {
 	  $meeting_type = "Dagsorden";
 	}
-	
-	// Saving the meeting data in ESDH Provider format. 
+
+	// Saving the meeting data in ESDH Provider format.
 	$meeting = array(
 	  'system_id' => $meeting_id,
 	  'meeting_id' => $meeting_id,
@@ -181,7 +181,7 @@ function os2web_edoc_esdh_mm_import_meeting($meeting) {
       }
     }
     else {
-      // Error logging to watchdog if the XML failde to parse. Check if all illegal characters are in the remove list. 
+      // Error logging to watchdog if the XML failde to parse. Check if all illegal characters are in the remove list.
       watchdog('eDoc MM', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
     }
   }
@@ -247,7 +247,16 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
   $xml_item['documentid'] = (string) $xml_item_document['documentid'];
   $xml_item['full_text'] = trim((string) $xml->FullText);
 
- if(variable_get('os2web_edoc_esdh_nl2br', TRUE)){
+  if(variable_get('os2web_edoc_esdh_headline_words', FALSE)){
+    $words = variable_get('os2web_edoc_esdh_headline_words');
+    $words = explode(',', $words);
+
+    $regex = '/(^|\n)(' . implode('|', $words) . ')\n/';
+
+    $xml_item['full_text'] = preg_replace($regex, '<b>$0</b>', $xml_item['full_text']);
+  }
+
+  if(variable_get('os2web_edoc_esdh_nl2br', TRUE)){
     $xml_item['full_text'] = nl2br($xml_item['full_text']);
   }
 
@@ -265,7 +274,7 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
      'title' => $xml_item['name'],
     ),
   );
-  
+
   if ($item['access'] !== 'SKAL PUBLICERES' || stripos($meeting['agenda_access'], 'lukket') !== FALSE) {
     $item['access'] = 'Lukket';
   }
@@ -277,7 +286,7 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
 	'sysid' => $xml_item['documentid'] . $xml_item['number'],
     );
   }
-  
+
   // Process bullets.
   foreach ($xml_item_bullet->Attachment as $bullet_xml) {
     $bullet_title = (string) $bullet_xml->NeutralTitle;
@@ -304,7 +313,7 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
 	'sysid' => $bullet_id,
       );
     }
-    
+
     // Process enclosure, if any
     $enclosure_item['filename_in'] = (string) $bullet_xml->PDFDocument;
     $enclosure_item['access'] = (string) $bullet_xml->PublishingType;
@@ -319,9 +328,9 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
         'filetype' => '.pdf',
       );
     }
-    
+
   }
-  
+
   $item += os2web_esdh_provider_default_item();
   return $item;
 }
