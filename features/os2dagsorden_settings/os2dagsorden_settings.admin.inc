@@ -251,7 +251,27 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description' => t('This decides whether the will be added a prefix to Bilag or Case bullet point attachment on import.<br/>e.g. <b>Bilag:</b> Indsigelser of Bemaerkninger.'),
     '#default_value' => variable_get('os2dagsorden_add_type_prefix', 'true'),
   );
-  
+  if (module_exists('os2dagsorden_file_conversion_manager')){
+  $form['os2dagsorden_file_import'] = array(
+    '#type' => 'fieldset',
+      '#collapsible' => TRUE,
+    '#title' => t('* > PDF converting configuration'),
+  );
+ $form['os2dagsorden_file_import']['os2web_copied_filetype'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Type of files to be converted when importing:'),
+    '#maxlength' => 200,
+    '#description' => t('Comma-separated list of file types. Example: xls,doc,docx,xlsx'),
+    '#default_value' => variable_get('os2web_copied_filetype', ''),
+  );
+  $form['os2dagsorden_file_import']['os2web_convertion_dir'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Directory to send the files for converting:'),
+    '#maxlength' => 200,
+    '#description' => t('This is the path where files copy for converting'),
+    '#default_value' => variable_get('os2web_convertion_dir', ''),
+);
+  } 
   //hidden agenda
   $form['os2dagsorden_hidden_agenda_committee'] = array(
     '#type' => 'textfield',

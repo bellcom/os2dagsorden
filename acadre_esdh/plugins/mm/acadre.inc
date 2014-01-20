@@ -173,11 +173,12 @@ function _acadre_esdh_import_meeting($info) {
     $meeting['meeting_date_finish'] = date_format($date_obj, 'Y-m-d H:i');
 
     // Full Doc:
+    $uri= _acadre_esdh_pdf_file_path(implode('/', array( variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $info['filesfolder'])),strtoupper($info['docfilename']));
     $meeting['full_doc'] = array(
-      'uri' => implode('/', array(
+      'uri' => $uri/*implode('/', array(
         variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
         $info['filesfolder'],
-        strtoupper($info['docfilename']))),//avoiding the problem with extensions
+        strtoupper($info['docfilename'])))*/,//avoiding the problem with extensions
       'title' => $meeting['title'],
     );
 	
@@ -486,8 +487,11 @@ function _acadre_esdh_pdf_file_path($path, $name){
   $name_arr = explode('.', $name);
   
   $pdf_path = $path . '/' . $name_arr[0] . '.PDF';
-  if (_acadre_esdh_similar_file_exists(drupal_realpath($pdf_path)))
-    return $pdf_path;
+  if ($pdf_file_path=_acadre_esdh_similar_file_exists(drupal_realpath($pdf_path))){
+ $pdf_file_path_parts=  pathinfo($pdf_file_path);  
+      return $path . '/' . $pdf_file_path_parts['basename'] ;
+  }
+    
   else
     return $path . '/' . $name;
 }
