@@ -188,6 +188,18 @@ function os2web_sbsys_esdh_mm_import_meeting($meeting) {
         'participants' => $participants,
         'participants_cancellation' => $participants_cancellation,
       );
+      $meeting_full_doc=explode('.', $meeting_uri);
+       $uri=implode('/', array(
+        variable_get('os2web_sbsys_esdh_mm_path', MM_IMPORT_DIR),
+        $meeting_full_doc[0],
+        $meeting_full_doc[0].'.pdf'));
+
+     if (file_exists(drupal_realpath($uri))) { 
+      $meeting['full_doc'] = array(
+      'uri' => $uri,
+      'title' => $meeting['title'],
+      );
+     }
 
       /*stan@bellcom.dk 06.10 - importing multiple agendas*/
       $meeting_agendas = array();

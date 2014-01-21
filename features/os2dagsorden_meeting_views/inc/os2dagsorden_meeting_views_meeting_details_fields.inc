@@ -53,10 +53,10 @@ function os2dagsorden_meeting_views_meeting_details_description_download(){
   }
 
   //opened version - if not empty
-  if (!empty($meeting->field_meeting_description['und'][0]['uri'])){
+ /* if (!empty($meeting->field_meeting_description['und'][0]['uri'])){
       echo '<a target="_blank" href="' . file_create_url($meeting->field_meeting_description['und'][0]['uri']) . 
       '" class="form-submit">Hent samlet dokument i PDF</a>';
-  }
+  }*/
   echo '</div>';
   echo '<div class="clearfix"></div>';
 
@@ -96,7 +96,20 @@ function os2dagsorden_meeting_views_meeting_details_description_download(){
 /////////////////////////////////////////header END /////////////////////////////////////////
 
 /////////////////////////////////////////PAGE fields start /////////////////////////////////////////
-
+function os2dagsorden_meeting_views_meeting_description_download(){
+	global $base_url;
+  $q = explode('/',$_GET['q']);
+  $meeting_id = $q[1];
+     $meeting = node_load($meeting_id);
+    
+  //opened version - if not empty
+  if (!empty($meeting->field_meeting_description['und'][0]['uri'])){
+      echo '<a target="_blank" href="' . file_create_url($meeting->field_meeting_description['und'][0]['uri']) . 
+      '" ><span class="print-meeting-link">Samlet dokument</span> </a>';
+  }
+	else 
+		 echo '<a target="_blank" href="/printpdf/meeting/'.$meeting_id.'/print" ><span class="print-meeting-link">Samlet dokument</span> </a>';
+}
 /////////////////////////////////////////DELTOG fields start /////////////////////////////////////////
 function os2dagsorden_meeting_views_meeting_details_fields_participants_deltog($meeting_id){
   $meeting = node_load($meeting_id);
