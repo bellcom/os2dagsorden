@@ -178,6 +178,20 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' => array('true' => t('Group separately'), 'false' => t('Put inline')),
     '#description' => t('This decides whether closed bullet points will be grouped separately as a additional block called "Lukket dagsorden", or put inline together the rest of the bullet points.'),
   );
+
+  //show latest meetings in my committee or all committees
+  $form['os2dagsorden_latest_meetings_view_settings'] = array(
+      '#type' => 'fieldset',
+      '#collapsible' => TRUE,
+      '#title' => t('Latest 8 meetings all/my committees view settings'),
+  );
+  $form['os2dagsorden_latest_meetings_view_settings']['os2dagsorden_latest_meetings_view_mode'] = array(
+    '#type' => 'radios',
+    '#title' => t('Switch beetween all/my committees meetings'),
+    '#options' => array('all' => t('Show meetings from all committees'), 'mine' => t('Show meetings from my committees only')),
+    '#default_value' => variable_get('os2dagsorden_latest_meetings_view_mode', 'all'),
+    '#description' => t('This decides whether the front page view will show 8 latest meeting from all committees or only from user committees (member of, follows, follows+)'),
+  );
   
   // frontpage layout settings
   $form['os2dagsorden_frontpage_layout_settings'] = array(
@@ -185,13 +199,13 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
      '#collapsible' => TRUE,
      '#title' => t('Frontpage layout and settings'),
   );
-  $options3 = array('false' => t('Expand'), 'true' => t('Colapse') );
-  $form['os2dagsorden_frontpage_layout_settings']['os2dagsorden_colapse_menu'] = array(
+  $options3 = array('false' => t('Expand'), 'true' => t('Collapse') );
+  $form['os2dagsorden_frontpage_layout_settings']['os2dagsorden_collapse_menu'] = array(
     '#type' => 'radios',
-    '#title' => t('Colapse/ekspand menu'),
-    '#default_value' => variable_get('os2dagsorden_colapse_menu', true),
+    '#title' => t('Collapse/expand menu'),
+    '#default_value' => variable_get('os2dagsorden_collapse_menu', true),
     '#options' => $options3,
-    '#description' => t('This decides whether a side menu expanden/collapsed.'),
+    '#description' => t('This decides whether a side menu expanded/collapsed.'),
   );
 
   //show or not show meeting category in the calendar
@@ -235,6 +249,37 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description' => t('Comma-separated list of committees ID changing status of which should send an email notification.'),
     '#default_value' => variable_get('os2dagsorden_send_notification_committee', ''),
   );
+  $form['os2dagsorden_meeting_import']['os2dagsorden_send_email_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Meeting notification email text',
+    '#description' => 'The email subject, which would be send to users interested in meeting publishing - Member / Follow+ / Follow (optional)',
+    '#default_value' => variable_get('os2dagsorden_send_email_subject', '!meeting_type til !committee er publiceret'),
+  );
+  $form['os2dagsorden_meeting_import']['os2dagsorden_send_email_body'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Meeting notification email text',
+    '#description' => 'The email body, which would be send to users interested in meeting publishing - Member / Follow+ / Follow (optional)',
+    '#default_value' => variable_get('os2dagsorden_send_email_body', 'Til !user' . PHP_EOL . PHP_EOL .
+      'Du abonnerer på !committee.' . PHP_EOL . 'Der er publiceret !meeting_type til !meeting_name !meeting_date.')
+  );
+  $form['os2dagsorden_meeting_import']['os2dagsorden_send_email_text_available_variables'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#value' => 'Can be used both in subject and body:<br/>
+    <b>!committe</b> - name of the committee<br/>
+    <b>!meeting_name</b> - title of the meeting<br/>
+    <b>!meeting_date</b> - date of the meeting<br/>
+    <b>!meeting_type</b> - type of the meeting with acticle: <i>et referat</i> or <i>en dagsorden</i><br/>
+    <b>!user</b> - name of the user that message is sent to<br/>',
+    '#title' => t('Available variables'),
+  );
+  $form['os2dagsorden_meeting_import']['os2dagsorden_follows_committee_send_notification'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('User that are just Follow the committee are getting notifications '),
+    '#description'=>t('Decide whether user that are just Follow the committee are getting notifications about new messages appeared on that committee.'),
+    '#default_value' => variable_get('os2dagsorden_follows_committee_send_notification', false), 
+  );
   $form['os2dagsorden_meeting_import']['os2dagsorden_send_timespan_of_notification'] = array(
     '#type' => 'textfield',
     '#title' => t('Meeting should be not older than:'),
@@ -262,14 +307,14 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#title' => t('Type of files to be converted when importing:'),
     '#maxlength' => 200,
     '#description' => t('Comma-separated list of file types. Example: xls,doc,docx,xlsx'),
-    '#default_value' => variable_get('os2web_copied_filetype', ''),
+    '#default_value' => variable_get('os2web_copied_filetype', OS2WEB_COPIED_FILETYPE),
   );
   $form['os2dagsorden_file_import']['os2web_convertion_dir'] = array(
     '#type' => 'textfield',
     '#title' => t('Directory to send the files for converting:'),
     '#maxlength' => 200,
     '#description' => t('This is the path where files copy for converting'),
-    '#default_value' => variable_get('os2web_convertion_dir', ''),
+    '#default_value' => variable_get('os2web_convertion_dir', OS2WEB_CONVERTION_DIR),
 );
   } 
   //hidden agenda
