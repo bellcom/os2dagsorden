@@ -115,10 +115,8 @@ features[variable][] = comment_subject_field_page
 features[variable][] = comment_subject_field_speaker_paper
 features[variable][] = field_bundle_settings_node__bullet_point
 features[variable][] = field_bundle_settings_node__meeting
-<<<<<<< HEAD
 features[variable][] = field_bundle_settings_node__page
-=======
->>>>>>> dev
+
 features[variable][] = language_content_type_bullet_point
 features[variable][] = language_content_type_bullet_point_attachment
 features[variable][] = language_content_type_meeting
