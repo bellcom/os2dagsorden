@@ -153,7 +153,8 @@ function _acadre_esdh_import_meeting($info) {
       'agenda_type' => (string) array_shift($xml->xpath("//fields/field[@name='name']")),
       'items' => array(),
     );
-   if (variable_get('os2web_acadre_add_committe_to_title', FALSE))
+                    
+   if (variable_get('os2web_acadre_add_committee_to_title', false))
       $meeting['title']=$meeting['committee_name']." ".$meeting['title'];
     	
     $publish_committee = array_map('trim', explode(',', variable_get('os2web_meetings_approved_committee', ACADRE_MM_DEFAULT_APPROVED)));
