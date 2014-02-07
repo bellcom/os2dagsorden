@@ -36,6 +36,7 @@ features[field][] = node-meeting-field_location
 features[field][] = node-meeting-field_meeting_acadre_id
 features[field][] = node-meeting-field_meeting_acadre_version
 features[field][] = node-meeting-field_meeting_category
+features[field][] = node-meeting-field_meeting_comments
 features[field][] = node-meeting-field_meeting_description
 features[field][] = node-meeting-field_meeting_description_add
 features[field][] = node-meeting-field_meeting_description_add_c
@@ -114,7 +115,10 @@ features[variable][] = comment_subject_field_page
 features[variable][] = comment_subject_field_speaker_paper
 features[variable][] = field_bundle_settings_node__bullet_point
 features[variable][] = field_bundle_settings_node__meeting
+<<<<<<< HEAD
 features[variable][] = field_bundle_settings_node__page
+=======
+>>>>>>> dev
 features[variable][] = language_content_type_bullet_point
 features[variable][] = language_content_type_bullet_point_attachment
 features[variable][] = language_content_type_meeting
