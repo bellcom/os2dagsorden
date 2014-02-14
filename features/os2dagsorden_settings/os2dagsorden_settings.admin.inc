@@ -150,12 +150,18 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides how a group of Cases/Sager will be titled'),
     '#default_value' => variable_get('os2dagsorden_sager_group_title', 'Sager'),
   );
+   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_attachment_onload'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Expand all attachments on bullet point open'),
+    '#description' => t('This decides whether all attachments will be expanded on bullet point open'),
+    '#default_value' => variable_get('os2dagsorden_expand_attachment_onload', FALSE),
+  );
 
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
-  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_attachment'] = array(
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_expand_bilag'] = array(
     '#type' => 'radios',
     '#title' => t('Expand attachment'),
-    '#default_value' => variable_get('os2dagsorden_expand_attachment'),
+    '#default_value' => variable_get('os2dagsorden_expand_bilag'),
     '#options' => $options,
     '#description' => t('This decides whether a certain type of bullet point attachment - bilag will be expanded (activated) when functionality "Expand whole bullet point" is executed.'),
   );
@@ -171,6 +177,16 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides whether a bullet point attachment converted from PDF to HTML is going to be shown in the application.<br/>Can be useful to disable display if users are known to used old browser versions (>IE8).'),
     '#default_value' => variable_get('os2dagsorden_show_bilag', true),
   );
+
+   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_massive_expand_collapse_button'] = array(
+    '#type' => 'radios',
+    '#title' => t('Massive expand/collapse button'),
+    '#default_value' => variable_get('os2dagsorden_show_massive_expand_collapse_button', 'true'),
+    '#options' => array('true' => t('Show'), 'false' => t('Hide')),
+    '#description' => t('This decides whether massive expand/collapse button will be shown on meeting views.'),
+  );
+  
+
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_group_closed_bullet_points'] = array(
     '#type' => 'radios',
     '#title' => t('Group closed closed bullet points as a separate block'),
@@ -184,7 +200,14 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
    '#description'=>t('This decides whether a comments field is visible on meeting view.'),
    '#default_value' => variable_get('os2dagsorden_show_comments', false),
   );
-
+  //hidden agenda
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_hidden_agenda_committee'] = array(
+    '#type' => 'textfield',
+    '#title' => 'List of committees which agenda is completely hidden to those without the rights',
+    '#maxlength' => 200,
+    '#description' => 'Comma-separated list of committees ID which agenda and the summary (samlet dokument) is hidden to those without the rights',
+    '#default_value' => variable_get('os2dagsorden_hidden_agenda_committee', OS2DAGSORDEN_HIDDEN_AGENGA_COMMITTEE),
+  );
   //show latest meetings in my committee or all committees
   $form['os2dagsorden_latest_meetings_view_settings'] = array(
       '#type' => 'fieldset',
@@ -214,21 +237,15 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description' => t('This decides whether a side menu expanded/collapsed.'),
   );
 
-  //show or not show meeting category in the calendar
-  $form['os2dagsorden_show_meeting_category_settings'] = array(
-      '#type' => 'fieldset',
-      '#collapsible' => TRUE,
-      '#title' => t('Show/not show meeting category in the calendar view'),
-  );
-  $options2 = array('true' => t('Show'), 'false' => t('Do not show'));
-  $form['os2dagsorden_show_meeting_category_settings']['os2dagsorden_show_meeting_category'] = array(
+  $form['os2dagsorden_frontpage_layout_settings']['os2dagsorden_show_search_block_title'] = array(
     '#type' => 'radios',
-    '#title' => t('Show meeting cetegories'),
-    '#default_value' => variable_get('os2dagsorden_show_meeting_category'),
-    '#options' => $options2,
-		'#description' => t('This decides whether a meeting title in the calendar view will be prefixed with the meeting category (<b>[P]</b>olitical/<b>[O]</b>rganization)'),
-  );
-  
+    '#title' => t('Show/Hide search block title'),
+    '#default_value' => variable_get('os2dagsorden_show_search_block_title', 'true'),
+    '#options' => array('true' => t('Show'), 'false' => t('Hide')),
+    '#description' => t('This decides whether a search block title show/hide.'),
+  ); 
+    
+
   //Meeting import settings
   $form['os2dagsorden_meeting_import'] = array(
       '#type' => 'fieldset',
@@ -242,12 +259,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description' => t('Sign with which the participants of the meeting will be separated. Is used in the meeting view.<br/> E.g. if delimeter is <b>coma (,)</b> the list would look like:<br/>
     Jørgen Andersen, Nich Bendtsen, Poul Møller, ...<br/><br/>HTML tags (such as &lt;br/&gt;) can be used.'),
   );
-  $form['os2dagsorden_meeting_import']['pdf2html_rendering_path'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Path for HTML files to be rendered'),
-    '#default_value' => variable_get('pdf2html_rendering_path', ''),
-    '#description' => t('Relative path for HTML files to be rendered by os2dagsorden_pdf2htmlEX module. If empty, the path with the original PDF files will be used.<br/><b>Important!</b> You will need to create the path yourself.'),
-  );
+  
   $form['os2dagsorden_meeting_import']['os2dagsorden_send_notification_committee'] = array(
     '#type' => 'textfield',
     '#title' => t('Send notification of committees'),
@@ -297,6 +309,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#default_value' => variable_get('os2dagsorden_send_timespan_of_notification', 10),
   );
 
+
   $form['os2dagsorden_meeting_import']['os2dagsorden_add_type_prefix'] = array(
     '#type' => 'radios',
     '#title' => t('Add prefix to Bilag/Sag bullet point attachments'),
@@ -311,7 +324,9 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' =>  array('pol' => t('Political'), 'org' => t('Organisation')),
     '#description' => t('This decides whether a default meeting category'),
   );
-  if (module_exists('os2dagsorden_file_conversion_manager')){
+
+ if (module_exists('os2dagsorden_file_conversion_manager')){
+
   $form['os2dagsorden_file_import'] = array(
     '#type' => 'fieldset',
       '#collapsible' => TRUE,
@@ -332,31 +347,53 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#default_value' => variable_get('os2web_convertion_dir', OS2WEB_CONVERTION_DIR),
 );
   } 
-    $form['os2dagsorden_user_default_meeting_category']=array(
-      '#title' => t('Default value for user meeting category'),
-      '#type' => 'checkboxes',
-      '#description' => t('Select default value for user meeting category.'),
-      '#options' => array('pol' => t('Political'), 'org' => t('Organisation')),
-      '#default_value'=>variable_get('os2dagsorden_user_default_meeting_category', array())
-);
-  //hidden agenda
-  $form['os2dagsorden_hidden_agenda_committee'] = array(
-    '#type' => 'textfield',
-    '#title' => 'List of committees which agenda is completely hidden to those without the rights',
-    '#maxlength' => 200,
-    '#description' => 'Comma-separated list of committees ID which agenda and the summary (samlet dokument) is hidden to those without the rights',
-    '#default_value' => variable_get('os2dagsorden_hidden_agenda_committee', OS2DAGSORDEN_HIDDEN_AGENGA_COMMITTEE),
-  );
-  
-    if (module_exists('os2dagsorden_pdf2htmlex')) {
-        $form['os2dagsorden_pdf2htmlex_path'] = array(
-            '#type' => 'textfield',
-            '#title' => 'Path to pdf2htmlEX',
-            '#description' => 'Path to pdf2htmlEX',
-            '#default_value' => variable_get('os2dagsorden_pdf2htmlex_path', ""),
-            '#element_validate' => array('_os2dagsorden_pdf2htmlEX_validate'),
+  if (module_exists('os2dagsorden_pdf2htmlex')) {
+    $form['os2dagsorden_pdf2htmlex_settings'] = array(
+       '#type' => 'fieldset',
+       '#collapsible' => TRUE,
+       '#title' => t('PDF > HTML Converter settings'),
         );
+     $form['os2dagsorden_pdf2htmlex_settings']['os2dagsorden_pdf2htmlex_path'] = array(
+       '#type' => 'textfield',
+       '#title' => 'Path to pdf2htmlEX',
+       '#description' => 'Path to pdf2htmlEX',
+       '#default_value' => variable_get('os2dagsorden_pdf2htmlex_path', ""),
+       '#element_validate' => array('_os2dagsorden_pdf2htmlEX_validate'),
+     );
+     $form['os2dagsorden_pdf2htmlex_settings']['pdf2html_rendering_path'] = array(
+       '#type' => 'textfield',
+       '#title' => t('Path for HTML files to be rendered'),
+       '#default_value' => variable_get('pdf2html_rendering_path', ''),
+       '#description' => t('Relative path for HTML files to be rendered by os2dagsorden_pdf2htmlEX module. If empty, the path with the original PDF files will be used.<br/><b>Important!</b> You will need to create the path yourself.'),
+   );
     }
+    $form['os2dagsorden_political_organizational_settings'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#title' => t('Political/organizational category settings'),
+  );
+  $options2 = array('true' => t('Show'), 'false' => t('Do not show'));
+  $form['os2dagsorden_political_organizational_settings']['os2dagsorden_show_meeting_category'] = array(
+    '#type' => 'radios',
+    '#title' => t('Show meeting categories'),
+    '#default_value' => variable_get('os2dagsorden_show_meeting_category'),
+    '#options' => $options2,
+    '#description' => t('This decides whether a meeting title in the calendar view will be prefixed with the meeting category (<b>[P]</b>olitical/<b>[O]</b>rganization)'),
+  );
+   $form['os2dagsorden_political_organizational_settings']['os2dagsorden_user_default_meeting_category']=array(
+    '#title' => t('Default value for user meeting category'),
+    '#type' => 'checkboxes',
+    '#description' => t('Select default value for user meeting category.'),
+    '#options' => array('pol' => t('Political'), 'org' => t('Organisation')),
+    '#default_value'=>variable_get('os2dagsorden_user_default_meeting_category', array())
+  );  
+   $form['os2dagsorden_political_organizational_settings']['os2dagsorden_default_meeting_cateroty'] = array(
+    '#type' => 'radios',
+    '#title' => t('Default meeting category'),
+    '#default_value' => variable_get('os2dagsorden_default_meeting_cateroty','pol'),
+    '#options' =>  array('pol' => t('Political'), 'org' => t('Organisation')),
+    '#description' => t('This decides whether a default meeting category'),
+  );
 
     return system_settings_form($form);
 }
