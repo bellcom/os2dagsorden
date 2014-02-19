@@ -1750,7 +1750,22 @@ os2dagsorden_meeting_views_meetings_search_fields_bpa_id($meta_data);
 ?>';
   $handler->display->display_options['fields']['php_5']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_5']['php_click_sortable'] = '';
-  /* Felt: indicator - has speaker paper */
+
+  /* Field: Search param - php */
+  $handler->display->display_options['fields']['php_6']['id'] = 'php_6';
+  $handler->display->display_options['fields']['php_6']['table'] = 'views';
+  $handler->display->display_options['fields']['php_6']['field'] = 'php';
+  $handler->display->display_options['fields']['php_6']['ui_name'] = 'Search param - php';
+  $handler->display->display_options['fields']['php_6']['label'] = '';
+  $handler->display->display_options['fields']['php_6']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php_6']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php_6']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_6']['php_output'] = '<?php
+os2dagsorden_meeting_views_meetings_search_fields_search_param();
+?>';
+  $handler->display->display_options['fields']['php_6']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_6']['php_click_sortable'] = '';
+  /* Field: indicator - has speaker paper */
   $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
   $handler->display->display_options['fields']['php_1']['table'] = 'views';
   $handler->display->display_options['fields']['php_1']['field'] = 'php';
@@ -1783,11 +1798,8 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_has_notes($row->nid);
   $handler->display->display_options['fields']['php_2']['ui_name'] = 'title - php';
   $handler->display->display_options['fields']['php_2']['label'] = 'Møde';
   $handler->display->display_options['fields']['php_2']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['php_2']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
-  $handler->display->display_options['fields']['php_2']['alter']['max_length'] = '12';
-  $handler->display->display_options['fields']['php_2']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['php_2']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['php_2']['element_label_class'] = 'views-field-field-title-short views-meeting-search-field-title';
+  $handler->display->display_options['fields']['php_2']['alter']['path'] = 'meeting/[nid][php_4][php_5][php_6]';
+  $handler->display->display_options['fields']['php_2']['element_label_class'] = 'views-field-field-title-short';
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php
 os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
@@ -1800,10 +1812,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['label'] = 'Dato';
   $handler->display->display_options['fields']['field_date']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_date']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
-  $handler->display->display_options['fields']['field_date']['alter']['max_length'] = '10';
-  $handler->display->display_options['fields']['field_date']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['field_date']['element_label_class'] = 'views-meeting-search-field-date';
+  $handler->display->display_options['fields']['field_date']['alter']['path'] = 'meeting/[nid][php_4][php_5][php_6]';
   $handler->display->display_options['fields']['field_date']['empty'] = '&nbsp;';
   $handler->display->display_options['fields']['field_date']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
@@ -1820,7 +1829,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
   $handler->display->display_options['fields']['field_committee']['label'] = '';
   $handler->display->display_options['fields']['field_committee']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_committee']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_committee']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
+  $handler->display->display_options['fields']['field_committee']['alter']['path'] = 'meeting/[nid][php_4][php_5][php_6]';
   $handler->display->display_options['fields']['field_committee']['alter']['max_length'] = '20';
   $handler->display->display_options['fields']['field_committee']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['field_committee']['alter']['trim'] = TRUE;
@@ -1837,7 +1846,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
   $handler->display->display_options['fields']['field_name_short']['label'] = 'Udvalg';
   $handler->display->display_options['fields']['field_name_short']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_name_short']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_name_short']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
+  $handler->display->display_options['fields']['field_name_short']['alter']['path'] = 'meeting/[nid][php_4][php_5][php_6]';
   $handler->display->display_options['fields']['field_name_short']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_name_short']['empty'] = '[field_committee]';
   /* Felt: Placering - php */
@@ -1847,8 +1856,7 @@ os2dagsorden_meeting_views_meetings_search_fields_meeting_title($data);
   $handler->display->display_options['fields']['php_3']['ui_name'] = 'Placering - php';
   $handler->display->display_options['fields']['php_3']['label'] = 'Placering';
   $handler->display->display_options['fields']['php_3']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['php_3']['alter']['path'] = 'meeting/[nid][php_4][php_5]';
-  $handler->display->display_options['fields']['php_3']['alter']['max_length'] = '25';
+  $handler->display->display_options['fields']['php_3']['alter']['path'] = 'meeting/[nid][php_4][php_5][php_6]';
   $handler->display->display_options['fields']['php_3']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['php_3']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['php_3']['use_php_setup'] = 0;
