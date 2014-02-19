@@ -156,6 +156,7 @@ function _acadre_esdh_import_meeting($info) {
       'special_conditions'=> (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field[@name='description']")),                
       'items' => array(),
     );
+
    if (variable_get('os2web_acadre_add_committee_to_title', false))
       $meeting['title']=$meeting['committee']." ".$meeting['title'];
     	
