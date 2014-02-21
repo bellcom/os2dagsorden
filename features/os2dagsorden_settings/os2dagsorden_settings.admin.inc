@@ -23,7 +23,7 @@ define('OS2DAGSORDEN_HIDDEN_AGENGA_COMMITTEE', '28');
  *
  * @return settings form.
  */
-function os2dagsorden_settings_settings_form($form, $form_state) {   
+function os2dagsorden_settings_settings_form($form, $form_state) {
 
   //Meetig view settings
   $form['os2dagsorden_meeting_view_settings'] = array(
@@ -37,25 +37,20 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides whether a print button is visible on each bullet point on meeting view.'),
     '#default_value' => variable_get('os2dagsorden_show_print_icon', false),
   );
-  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_bilag'] = array (
-    '#type' => 'checkbox',
-    '#title' => t('Show bullet point attachment (bilag) on meeting view and bullet point attachment views'),
-    '#description'=>t('This decides whether a bullet point attachment converted from PDF to HTML is going to be shown in the application.<br/>Can be useful to disable display if users are known to used old browser versions (>IE8).'),
-    '#default_value' => variable_get('os2dagsorden_show_bilag', true),
-);
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_comments'] = array(
    '#type' => 'checkbox',
    '#title' => t('Show comments on meeting view'),
    '#description'=>t('This decides whether a comments field is visible on meeting view.'),
    '#default_value' => variable_get('os2dagsorden_show_comments', false),
   );
- $form['os2dagsorden_meeting_view_settings']['os2dagsorden_group_closed_bullet_points'] = array(
+  $form['os2dagsorden_meeting_view_settings']['os2dagsorden_group_closed_bullet_points'] = array(
     '#type' => 'radios',
     '#title' => t('Group closed closed bullet points as a separate block'),
     '#default_value' => variable_get('os2dagsorden_group_closed_bullet_points', 'false'),
     '#options' => array('true' => t('Group separately'), 'false' => t('Put inline')),
     '#description' => t('This decides whether closed bullet points will be grouped separately as a additional block called "Lukket dagsorden", or put inline together the rest of the bullet points.'),
-  );   
+  );
+  
   //hidden agenda
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_hidden_agenda_committee'] = array(
     '#type' => 'textfield',
@@ -72,7 +67,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#collapsed'=>TRUE, 
     '#title' => t('Meeting view layout'),
   ); 
-    //meeting view settings
+  //meeting view settings
   $form['os2dagsorden_meeting_view_layout']['os2dagsorden_expand_all_bullets'] = array(
     '#type' => 'checkbox',
     '#title' => t('Expand all bullets on agenda'),
@@ -88,7 +83,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
   $form['os2dagsorden_meeting_view_layout']['os2dagsorden_expand_bilag'] = array(
     '#type' => 'radios',
-    '#title' => t('Expand attachment'),
+    '#title' => t('Expand Bilag/Sag'),
     '#default_value' => variable_get('os2dagsorden_expand_bilag'),
     '#options' => $options,
     '#description' => t('This decides whether a certain type of bullet point attachment - bilag will be expanded (activated) when functionality "Expand whole bullet point" is executed.'),
@@ -101,6 +96,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' => array('true' => t('Show'), 'false' => t('Hide')),
     '#description' => t('This decides whether massive expand/collapse button will be shown on meeting views.'),
   );
+
   //show latest meetings in my committee or all committees
   $form['os2dagsorden_latest_meetings_view_settings'] = array(
       '#type' => 'fieldset',
@@ -142,7 +138,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
   $form['os2dagsorden_meeting_import'] = array(
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
+      '#collapsed'=>TRUE,
       '#title' => t('General meeting import settings'),
   );
   $form['os2dagsorden_meeting_import']['participants_delimeter'] = array(
@@ -204,8 +200,8 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
  if (module_exists('os2dagsorden_file_conversion_manager')){
   $form['os2dagsorden_file_import'] = array(
     '#type' => 'fieldset',
-     '#collapsible' => TRUE,
-     '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#collapsed'=>TRUE,
     '#title' => t('* > PDF converting configuration'),
   );
  $form['os2dagsorden_file_import']['os2web_copied_filetype'] = array(
@@ -272,7 +268,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' =>  array('pol' => t('Political'), 'org' => t('Organisation')),
     '#description' => t('This decides whether a default meeting category'),
   );
- //cron frequencies
+  //cron frequencies
   $form['os2dagsorden_cron_job_freq'] = array(
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
@@ -333,43 +329,45 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
         '#title' => t('Frequency of Adlib (* to PDF) conversion cron job'), 
     );
   }
-  $form['#submit'][] = 'os2dagsorden_settings_cron_job_submit';  
-// SOFD Integration settings
+
+  $form['#submit'][] = 'os2dagsorden_settings_cron_job_submit';
+    // SOFD Integration settings
     if(module_exists('os2dagsorden_importer')){
         $form['os2dagsorden_pws_sofd_group'] = array(
-          '#type' => 'fieldset',
-          '#collapsible' => TRUE,
-          '#colapsed' => TRUE, 
-          '#title' => t('SOFD Integration settings'),
+            '#type' => 'fieldset',
+            '#collapsible' => TRUE,
+            '#collapsed' => TRUE,
+            '#title' => t('SOFD Integration settings'),
         );
         $form['os2dagsorden_pws_sofd_group']['os2dagsorden_pws_use_local_copy'] = array(
-           '#type' => 'checkbox',
-           '#default_value' => variable_get('os2dagsorden_pws_use_local_copy'),
-           '#title' => t('Use local XML files'), 
-           '#description' => variable_get('os2dagsorden_pws_use_local_copy') ? 'Diselect and click save to enable the fields below' : 'Selecting and clicking save will disable the textfields below'
+            '#type' => 'checkbox',
+            '#default_value' => variable_get('os2dagsorden_pws_use_local_copy'),
+            '#title' => t('Use local XML files'), 
+            '#description' => variable_get('os2dagsorden_pws_use_local_copy') ? 'Diselect and click save to enable the fields below' : 'Selecting and clicking save will disable the textfields below'
         );
         $form['os2dagsorden_pws_sofd_group']['os2dagsorden_pws_v_meetings_url'] = array(
-           '#type' => 'textfield',
-           '#default_value' => variable_get('os2dagsorden_pws_v_meetings_url'),
-           '#title' => t('Meeting (planned meetings) view url:'),
-           '#maxlength' => 256, 
-           '#disabled' => variable_get('os2dagsorden_pws_use_local_copy'),
+            '#type' => 'textfield',
+            '#default_value' => variable_get('os2dagsorden_pws_v_meetings_url'),
+            '#title' => t('Meeting (planned meetings) view url:'),
+            '#maxlength' => 256, 
+            '#disabled' => variable_get('os2dagsorden_pws_use_local_copy'),
         );
         $form['os2dagsorden_pws_sofd_group']['os2dagsorden_pws_v_meetinggroups_url'] = array(
-           '#type' => 'textfield',
-           '#default_value' => variable_get('os2dagsorden_pws_v_meetinggroups_url'),
-           '#title' => t('Meeting groups (is member of/follows/follows+) view url:'),
-           '#maxlength' => 256, 
-           '#disabled' => variable_get('os2dagsorden_pws_use_local_copy'),
+            '#type' => 'textfield',
+            '#default_value' => variable_get('os2dagsorden_pws_v_meetinggroups_url'),
+            '#title' => t('Meeting groups (is member of/follows/follows+) view url:'),
+            '#maxlength' => 256, 
+            '#disabled' => variable_get('os2dagsorden_pws_use_local_copy'),
         );
         $form['os2dagsorden_pws_sofd_group']['os2dagsorden_pws_v_acadregroups_url'] = array(
-           '#type' => 'textfield',
-           '#default_value' => variable_get('os2dagsorden_pws_v_acadregroups_url'),
-           '#title' => t('Acadre groups (committees) url:'),
-           '#maxlength' => 256, 
-           '#disabled' => variable_get('os2dagsorden_pws_use_local_copy'),
+            '#type' => 'textfield',
+            '#default_value' => variable_get('os2dagsorden_pws_v_acadregroups_url'),
+            '#title' => t('Acadre groups (committees) url:'),
+            '#maxlength' => 256, 
+            '#disabled' => variable_get('os2dagsorden_pws_use_local_copy'),
         );
     }
+  
     return system_settings_form($form);
 }
 
