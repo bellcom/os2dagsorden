@@ -168,68 +168,6 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'os2dagsorden_calendar_block_ballerup';
-  $context->description = 'Sidepane and the calendar block. Will be shown everywhere except the month view of a big calendar, and the pages with text (attachments).';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        '~calendar-field-date/month*' => '~calendar-field-date/month*',
-        '~admin/*' => '~admin/*',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'authenticated user' => 'authenticated user',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views--exp-meetings_search-page' => array(
-          'module' => 'views',
-          'delta' => '-exp-meetings_search-page',
-          'region' => 'content',
-          'weight' => '-22',
-        ),
-        'menu-menu-sidepane-menu' => array(
-          'module' => 'menu',
-          'delta' => 'menu-sidepane-menu',
-          'region' => 'sidebar_second',
-          'weight' => '-22',
-        ),
-        'views-events-block_1' => array(
-          'module' => 'views',
-          'delta' => 'events-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-21',
-        ),
-        'views-user_committee-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_committee-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-20',
-        ),
-        'views-user_follow_committees-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_follow_committees-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-19',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Sidepane and the calendar block. Will be shown everywhere except the month view of a big calendar, and the pages with text (attachments).');
-  $export['os2dagsorden_calendar_block_ballerup'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'os2dagsorden_content';
   $context->description = 'content is shown everywhere';
   $context->tag = '';
@@ -279,13 +217,13 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => 'c8c6c91b397acf23018fcefd40a1fa29',
           'region' => 'content',
-          'weight' => '0',
+          'weight' => '-10',
         ),
         'views-0293ca2a3a9d3ff12dd399cf7b0b4333' => array(
           'module' => 'views',
           'delta' => '0293ca2a3a9d3ff12dd399cf7b0b4333',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-11',
         ),
       ),
     ),
@@ -367,117 +305,6 @@ function os2dagsorden_blocks_positioning_context_default_contexts() {
   // Included for use with string extractors like potx.
   t('show or hides the side pane');
   $export['os2dagsorden_show_hide_menu'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'os2dagsorden_sidepane';
-  $context->description = 'Will be shown on calendar month view only. Other time os2web_calendar (sidepane included will be shown))';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'calendar-field-date/month*' => 'calendar-field-date/month*',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'authenticated user' => 'authenticated user',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'menu-menu-sidepane-menu' => array(
-          'module' => 'menu',
-          'delta' => 'menu-sidepane-menu',
-          'region' => 'sidebar_second',
-          'weight' => '-22',
-        ),
-        'views-user_committee-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_committee-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-21',
-        ),
-        'views-user_follow_committees-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_follow_committees-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-20',
-        ),
-        'views--exp-meetings_search-page' => array(
-          'module' => 'views',
-          'delta' => '-exp-meetings_search-page',
-          'region' => 'sidebar_second',
-          'weight' => '-19',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Will be shown on calendar month view only. Other time os2web_calendar (sidepane included will be shown))');
-  $export['os2dagsorden_sidepane'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'os2dagsorden_sidepane_ballerup';
-  $context->description = 'Will be shown on calendar month view only. Other time os2web_calendar (sidepane included will be shown))';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'calendar-field-date/month*' => 'calendar-field-date/month*',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'authenticated user' => 'authenticated user',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views--exp-meetings_search-page' => array(
-          'module' => 'views',
-          'delta' => '-exp-meetings_search-page',
-          'region' => 'content',
-          'weight' => '-9',
-        ),
-        'menu-menu-sidepane-menu' => array(
-          'module' => 'menu',
-          'delta' => 'menu-sidepane-menu',
-          'region' => 'sidebar_second',
-          'weight' => '-22',
-        ),
-        'views-user_committee-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_committee-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-21',
-        ),
-        'views-user_follow_committees-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_follow_committees-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-20',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Will be shown on calendar month view only. Other time os2web_calendar (sidepane included will be shown))');
-  $export['os2dagsorden_sidepane_ballerup'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */

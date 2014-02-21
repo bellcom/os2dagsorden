@@ -64,6 +64,24 @@ function os2dagsorden_rules_and_permissions_user_default_permissions() {
     'module' => 'toolbar',
   );
 
+  // Exported permission: administer contexts.
+  $permissions['administer contexts'] = array(
+    'name' => 'administer contexts',
+    'roles' => array(
+      0 => 'os2dagsorden admin',
+    ),
+    'module' => 'context_ui',
+  );
+
+  // Exported permission: administer menu.
+  $permissions['administer menu'] = array(
+    'name' => 'administer menu',
+    'roles' => array(
+      0 => 'os2dagsorden admin',
+    ),
+    'module' => 'menu',
+  );
+
   // Exported permission: administer os2web.
   $permissions['administer os2web'] = array(
     'name' => 'administer os2web',
