@@ -23,7 +23,7 @@ function os2dagsorden_settings_strongarm() {
   $strongarm->name = 'file_default_scheme';
   $strongarm->value = 'private';
   $export['file_default_scheme'] = $strongarm;
-  
+
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -51,7 +51,7 @@ function os2dagsorden_settings_strongarm() {
   $strongarm->name = 'file_lock_regex';
   $strongarm->value = '/.*/';
   $export['file_lock_regex'] = $strongarm;
-  
+
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -95,7 +95,7 @@ function os2dagsorden_settings_strongarm() {
     'domain' => '',
     'prefix' => 'da',
     'weight' => '0',
-    'javascript' => '9GWmA-RCkX34XKv0KctWpSrUmozfpnvnKiNTdUXldes',
+    'javascript' => 'jRlSoQJZAg9edHsvAmOrCAdwyQYp-5VnCPjYkg_ECrc',
   );
   $export['language_default'] = $strongarm;
 
