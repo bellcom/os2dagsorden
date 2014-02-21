@@ -33,7 +33,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
 	  $nids = array_keys($result['node']);
 	  $node = reset(entity_load('node', $nids));
       }
-      else {//if fails, trying to get meeting from date and committe combination. Assuming this is unique
+
+      if (empty($node)){//if fails, trying to get meeting from date and committe combination. Assuming this is unique
 	  $committee = _os2web_esdh_provider_find_create_committee($meeting['committee_id'], $meeting['committee_name'], $meeting['committee_group_id']);
 	  
 	  //getting meeting
@@ -111,7 +112,12 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       
      //Adding comments
       if (isset($meeting['description'])){
-       $node->field_meeting_comments[LANGUAGE_NONE][0]['value'] = $meeting['comments'];
+       $node->field_meeting_comments[LANGUAGE_NONE][0]['value'] = $meeting['description'];
+      }
+      
+     
+      if (isset($meeting['special_conditions'])){
+           $node->field_meeting_conditions[LANGUAGE_NONE][0]['value'] = $meeting['special_conditions'];
       }
  
       //Adding participants cancellations
