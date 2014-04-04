@@ -96,6 +96,13 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' => array('true' => t('Show'), 'false' => t('Hide')),
     '#description' => t('This decides whether massive expand/collapse button will be shown on meeting views.'),
   );
+  
+  $form['os2dagsorden_sidepane_menu_layout']['os2dagsorden_show_calender'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show the calendar block on calendar pages:'),
+    '#description' => t('This decides whether show/hide the calendar block on the right side pane on the calendar pages.'),
+    '#default_value' => variable_get('os2dagsorden_show_calender', FALSE),
+  ); 
 
   //show latest meetings in my committee or all committees
   $form['os2dagsorden_latest_meetings_view_settings'] = array(
