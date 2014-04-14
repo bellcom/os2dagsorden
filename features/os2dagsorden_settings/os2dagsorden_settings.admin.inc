@@ -275,6 +275,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
        '#title' => 'Path to pdf2htmlEX',
        '#description' => 'Path to pdf2htmlEX',
        '#default_value' => variable_get('os2dagsorden_pdf2htmlex_path', "")
+       '#element_validate' => array('_os2dagsorden_pdf2htmlEX_validate'),
       );
      $form['os2dagsorden_pdf2htmlex_settings']['pdf2html_rendering_path'] = array(
        '#type' => 'textfield',
@@ -416,6 +417,15 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     }
   
   return system_settings_form($form);
+}
+
+function _os2dagsorden_pdf2htmlEX_validate($element, &$form_state){
+    $value = $element['#value'];
+    $exec = shell_exec("which " . $value);
+    if(empty($exec)){
+            form_error($element, "Incorrect pdf2htmlEX path");
+            watchdog("os2dagsorden", t('Incorrect pdf2htmlEX path'));
+        }
 }
 
 /**
