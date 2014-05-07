@@ -335,6 +335,7 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
        'sysid' => 'bilag_' . $xml_item['documentid'],
        'access' => TRUE,
        'filetype' => '.pdf',
+       'is_bp_summary' => TRUE,
      );
     foreach ($xml_item_bullet->Attachment as $bullet_xml) {
         $bullet_id = (string) $bullet_xml['attachmentid'];

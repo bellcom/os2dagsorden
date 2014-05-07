@@ -471,8 +471,10 @@ function _os2web_esdh_provider_add_enclosure_bullet($enclosure, $file) {
         node_object_prepare($node);
         $node->field_bpa_id[$node->language][0]['value'] = $enclosure['sysid'];
     }
-
-    $node->title = 'Bilag: ' . $enclosure['title'];
+      if (isset($enclosure['is_bp_summary'])) 
+          $node->title = $enclosure['title'];
+      else
+          $node->title = 'Bilag: ' . $enclosure['title'];
     if ($node->title > 250)
       $node->title = substr($node->title, 0, 250);
        
