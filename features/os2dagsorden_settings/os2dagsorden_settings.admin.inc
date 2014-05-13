@@ -46,6 +46,12 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description'=>t('This decides whether a print button is visible on each bullet point on meeting view.'),
     '#default_value' => variable_get('os2dagsorden_show_print_icon', false),
   );
+   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_closed_bullet_point_content'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show closed bullet point content on directly on meeting view'),
+    '#description' => t('This decides whether a closed bullet point content will shown the same way as open bullet point - directly on the meeting view.'),
+    '#default_value' => variable_get('os2dagsorden_show_closed_bullet_point_content', FALSE),
+  );
  
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_group_closed_bullet_points'] = array(
     '#type' => 'radios',
@@ -62,6 +68,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#description' => 'Comma-separated list of committees ID which agenda and the summary (samlet dokument) is hidden to those without the rights',
     '#default_value' => variable_get('os2dagsorden_hidden_agenda_committee', OS2DAGSORDEN_HIDDEN_AGENGA_COMMITTEE),
   );
+ 
   //expand or not expand bilag on bullet point expand
   //Meetig view settings
   $form['os2dagsorden_meeting_view_layout'] = array(
@@ -274,7 +281,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
        '#type' => 'textfield',
        '#title' => 'Path to pdf2htmlEX',
        '#description' => 'Path to pdf2htmlEX',
-       '#default_value' => variable_get('os2dagsorden_pdf2htmlex_path', "")
+       '#default_value' => variable_get('os2dagsorden_pdf2htmlex_path', ""),
        '#element_validate' => array('_os2dagsorden_pdf2htmlEX_validate'),
       );
      $form['os2dagsorden_pdf2htmlex_settings']['pdf2html_rendering_path'] = array(
