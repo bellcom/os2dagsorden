@@ -97,20 +97,19 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#default_value' => variable_get('os2dagsorden_expand_bilag_sag_bullet', true),
   );
   $options = array('true' => t('Expand'), 'false' => t('Not expand (but keep it that way if the bilag has been expanded before)'));
-  $form['os2dagsorden_meeting_view_layout']['os2dagsorden_expand_bilag'] = array(
+   $form['os2dagsorden_meeting_view_layout']['os2dagsorden_expand_bilags'] = array(
     '#type' => 'radios',
-    '#title' => t('Expand attachment'),
-    '#default_value' => variable_get('os2dagsorden_expand_bilag', 'true'),
+    '#title' => t('Expand Bilag'),
+    '#default_value' => variable_get('os2dagsorden_expand_bilags', 'true'),
     '#options' => $options,
     '#description' => t('This decides whether a certain type of bullet point attachment - bilag will be expanded (activated) when functionality "Expand whole bullet point" is executed.'),
   );
-
-  $form['os2dagsorden_meeting_view_layout']['os2dagsorden_show_massive_expand_collapse_button'] = array(
+  $form['os2dagsorden_meeting_view_layout']['os2dagsorden_expand_cases'] = array(
     '#type' => 'radios',
-    '#title' => t('Massive expand/collapse button'),
-    '#default_value' => variable_get('os2dagsorden_show_massive_expand_collapse_button', 'true'),
-    '#options' => array('true' => t('Show'), 'false' => t('Hide')),
-    '#description' => t('This decides whether massive expand/collapse button will be shown on meeting views.'),
+    '#title' => t('Expand Sag'),
+    '#default_value' => variable_get('os2dagsorden_expand_cases', 'false'),
+    '#options' => $options,
+    '#description' => t('This decides whether a certain type of bullet point attachment -case will be expanded (activated) when functionality "Expand whole bullet point" is executed.'),
   );
   $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_attachments_mode'] = array(
     '#type' => 'radios',
