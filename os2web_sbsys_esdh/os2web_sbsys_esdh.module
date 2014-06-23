@@ -55,12 +55,37 @@ function os2web_sbsys_esdh_form_os2web_settings_settings_form_alter(&$form, &$fo
      '#title' => t('Add committee name to meeting title'), 
      '#description' =>'This decides whether a committee name will be added to meeting title'
   );
+  $form['meetings']['os2web_sbsys_esdh_banned_activate_regex'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Aktiver regex',
+    '#description' => t('This decides whether the regulax expression or CSV list will be used to trim out the unneeded content from XMLs.'),
+    '#default_value' => variable_get('os2web_sbsys_esdh_banned_activate_regex', FALSE),
+  );
+
   $form['meetings']['os2web_sbsys_esdh_banned_special_char'] = array(
     '#type' => 'textfield',
-    '#title' => 'Ikke standard XML tegn der skal fjernes ved import',
+    '#title' => 'Ikke standard XML tegn der skal fjernes ved import (CSV)',
     '#maxlength' => 200,
     '#description' => 'Komma sepereret liste over ikke standard tegn der skal fjernes ved import.',
     '#default_value' => variable_get('os2web_sbsys_esdh_banned_special_char', MM_DEFAULT_BANNED_CHAR),
+    '#states' => array(
+      'invisible' => array(
+       ':input[name="os2web_sbsys_esdh_banned_activate_regex"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['meetings']['os2web_sbsys_esdh_banned_special_regex'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Ikke standard XML tegn der skal fjernes ved import (regex)',
+    '#maxlength' => 200,
+    '#description' => 'Regular expression over ikke standard tegn der skal fjernes ved import.',
+    '#default_value' => variable_get('os2web_sbsys_esdh_banned_special_regex', MM_DEFAULT_BANNED_REGEX),
+    '#states' => array(
+      'invisible' => array(
+       ':input[name="os2web_sbsys_esdh_banned_activate_regex"]' => array('checked' => FALSE),
+      ),
+    ),
   );
   
 }
