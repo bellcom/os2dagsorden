@@ -96,6 +96,13 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#options' => array('true' => t('Show'), 'false' => t('Hide')),
     '#description' => t('This decides whether massive expand/collapse button will be shown on meeting views.'),
   );
+  
+  $form['os2dagsorden_sidepane_menu_layout']['os2dagsorden_show_calender'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show the calendar block on calendar pages:'),
+    '#description' => t('This decides whether show/hide the calendar block on the right side pane on the calendar pages.'),
+    '#default_value' => variable_get('os2dagsorden_show_calender', FALSE),
+  ); 
 
    $form['os2dagsorden_meeting_view_settings']['os2dagsorden_show_attachments_mode'] = array(
     '#type' => 'radios',
@@ -140,11 +147,7 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#default_value' => variable_get('os2dagsorden_show_search_block_title', 'true'),
     '#options' => array('true' => t('Show'), 'false' => t('Hide')),
     '#description' => t('This decides whether a search block title show/hide.'),
-<<<<<<< HEAD
   ); 
-
-=======
-  );
 
   // sidemenu layout settings
   $form['os2dagsorden_sidepane_menu_layout'] = array(
@@ -194,7 +197,6 @@ function os2dagsorden_settings_settings_form($form, $form_state) {
     '#default_value' => variable_get('os2dagsorden_budget_committee', FALSE),
   );
     
->>>>>>> b214556f184b6626b30e5df210cd706c2bfc0b21
   //Meeting import settings
   $form['os2dagsorden_meeting_import'] = array(
       '#type' => 'fieldset',

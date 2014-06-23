@@ -14,7 +14,6 @@ dependencies[] = print_pdf
 dependencies[] = rules
 dependencies[] = taxonomy
 dependencies[] = toolbar
-dependencies[] = ultimate_cron
 features[features_api][] = api:1
 features[rules_config][] = rules_disable_direct_content_view_for_non_admins
 features[user_permission][] = access PDF version

@@ -10,6 +10,7 @@ include_once('os2web_sbsys_esdh.features.inc');
 define('MM_IMPORT_DIR', 'public://sbsys');
 define('MM_DEFAULT_APPROVED', '11');
 define('MM_DEFAULT_BANNED_CHAR', '&#xC;');
+define('MM_DEFAULT_BANNED_REGEX', '/&#x.*;/');
 
 /**
  * Implements hook_ctools_plugin_directory().

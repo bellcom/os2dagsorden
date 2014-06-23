@@ -17,6 +17,11 @@ function os2dagsorden_settings_context_default_contexts() {
   $context->description = 'Will be shown on calendar month view only. Other time os2web_calendar (sidepane included will be shown))';
   $context->tag = '';
   $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        '~admin/*' => '~admin/*',
+      ),
+    ),
     'user' => array(
       'values' => array(
         'authenticated user' => 'authenticated user',

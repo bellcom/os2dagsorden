@@ -340,7 +340,27 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
        'sysid' => 'bilag_' . $xml_item['documentid'],
        'access' => TRUE,
        'filetype' => '.pdf',
+       'is_bp_summary' => TRUE,
      );
+    if (!empty($xml_item_bullet)){
+      foreach ($xml_item_bullet->Attachment as $bullet_xml) {
+          $bullet_id = (string) $bullet_xml['attachmentid'];
+                // Process enclosure, if any
+        $enclosure_item['filename_in'] = (string) $bullet_xml->PDFDocument;
+        $enclosure_item['access'] = (string) $bullet_xml->PublishingType;
+        if (strlen($enclosure_item['filename_in']) > 0 && $enclosure_item['access'] == 'SKAL PUBLICERES') {
+          $item['enclosures'][] = array(
+            'uri' => implode('/', array(
+            trim($meeting['uri'], "/"),
+            $enclosure_item['filename_in'])),
+            'title' => trim((string) $bullet_xml->Title),
+            'sysid' => 'bilag_' . $bullet_id,
+            'access' => TRUE,
+            'filetype' => '.pdf',
+          );
+          }
+      }
+    }
   }
 
   $item += os2web_esdh_provider_default_item();

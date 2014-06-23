@@ -8,7 +8,6 @@ project = os2dagsorden_settings
 dependencies[] = context
 dependencies[] = ctools
 dependencies[] = features
-dependencies[] = file_lock
 dependencies[] = locale
 dependencies[] = menu
 dependencies[] = print

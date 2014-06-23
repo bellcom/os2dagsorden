@@ -95,7 +95,7 @@ function os2dagsorden_settings_strongarm() {
     'domain' => '',
     'prefix' => 'da',
     'weight' => '0',
-    'javascript' => '9GWmA-RCkX34XKv0KctWpSrUmozfpnvnKiNTdUXldes',
+    'javascript' => 'jRlSoQJZAg9edHsvAmOrCAdwyQYp-5VnCPjYkg_ECrc',
   );
   $export['language_default'] = $strongarm;
 
