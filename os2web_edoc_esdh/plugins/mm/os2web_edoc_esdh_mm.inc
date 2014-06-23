@@ -57,10 +57,15 @@ function os2web_edoc_esdh_mm_get_import_list() {
  */
 function utf8_for_xml($string)
 {
-    #$replace_me = "&#xC;";
-    $replace_me =  variable_get('os2web_edoc_esdh_banned_special_char');
-    $str_new = str_replace($replace_me, "", $string);
-    return $str_new;
+  if (variable_get('os2web_edoc_esdh_banned_activate_regex', FALSE)) {//using regex
+    $replace_me =  variable_get('os2web_edoc_esdh_banned_special_regex','');
+    $str_new = preg_replace($replace_me, "", $string);  
+  }
+  else {//using CSV list
+    $replace_me =  variable_get('os2web_edoc_esdh_banned_special_char','');
+    $str_new = str_replace(explode(',', $replace_me), "", $string);
+  }
+  return $str_new;
 }
 
 /**
@@ -337,22 +342,24 @@ function _os2web_edoc_esdh_mm_import_meeting_agenda_item($meeting, $xml) {
        'filetype' => '.pdf',
        'is_bp_summary' => TRUE,
      );
-    foreach ($xml_item_bullet->Attachment as $bullet_xml) {
-        $bullet_id = (string) $bullet_xml['attachmentid'];
-              // Process enclosure, if any
-      $enclosure_item['filename_in'] = (string) $bullet_xml->PDFDocument;
-      $enclosure_item['access'] = (string) $bullet_xml->PublishingType;
-      if (strlen($enclosure_item['filename_in']) > 0 && $enclosure_item['access'] == 'SKAL PUBLICERES') {
-        $item['enclosures'][] = array(
-          'uri' => implode('/', array(
-          trim($meeting['uri'], "/"),
-          $enclosure_item['filename_in'])),
-          'title' => trim((string) $bullet_xml->Title),
-          'sysid' => 'bilag_' . $bullet_id,
-          'access' => TRUE,
-          'filetype' => '.pdf',
-        );
-        }
+    if (!empty($xml_item_bullet)){
+      foreach ($xml_item_bullet->Attachment as $bullet_xml) {
+          $bullet_id = (string) $bullet_xml['attachmentid'];
+                // Process enclosure, if any
+        $enclosure_item['filename_in'] = (string) $bullet_xml->PDFDocument;
+        $enclosure_item['access'] = (string) $bullet_xml->PublishingType;
+        if (strlen($enclosure_item['filename_in']) > 0 && $enclosure_item['access'] == 'SKAL PUBLICERES') {
+          $item['enclosures'][] = array(
+            'uri' => implode('/', array(
+            trim($meeting['uri'], "/"),
+            $enclosure_item['filename_in'])),
+            'title' => trim((string) $bullet_xml->Title),
+            'sysid' => 'bilag_' . $bullet_id,
+            'access' => TRUE,
+            'filetype' => '.pdf',
+          );
+          }
+      }
     }
   }
 
